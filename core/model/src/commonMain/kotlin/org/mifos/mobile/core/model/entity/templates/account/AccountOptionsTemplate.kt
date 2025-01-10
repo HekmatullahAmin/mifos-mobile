@@ -9,21 +9,21 @@
  */
 package org.mifos.mobile.core.model.entity.templates.account
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
 /**
  * Created by Rajan Maurya on 10/03/17.
  */
 
-@MyParcelize
+@Parcelize
 data class AccountOptionsTemplate(
 
-    var fromAccountOptions: List<AccountOption> = ArrayList(),
+    val fromAccountOptions: List<AccountOption> = ArrayList(),
 
-    var toAccountOptions: List<AccountOption> = ArrayList(),
+    val toAccountOptions: List<AccountOption> = ArrayList(),
 
-    var fromAccountTypeOptions: List<AccountType> = ArrayList(),
+    val fromAccountTypeOptions: List<AccountType> = ArrayList(),
 
-    var toAccountTypeOptions: List<AccountType> = ArrayList(),
+    val toAccountTypeOptions: List<AccountType> = ArrayList(),
 ) : Parcelable

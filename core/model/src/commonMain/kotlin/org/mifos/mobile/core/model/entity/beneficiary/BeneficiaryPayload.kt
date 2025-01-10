@@ -9,20 +9,20 @@
  */
 package org.mifos.mobile.core.model.entity.beneficiary
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
-@MyParcelize
+@Parcelize
 data class BeneficiaryPayload(
-    internal var locale: String = "en_GB",
+    internal val locale: String = "en_GB",
 
-    var name: String? = null,
+    val name: String? = null,
 
-    var accountNumber: String? = null,
+    val accountNumber: String? = null,
 
-    var accountType: Int? = 0,
+    val accountType: Int? = 0,
 
-    var transferLimit: Float? = 0f,
+    val transferLimit: Float? = 0f,
 
-    var officeName: String? = null,
+    val officeName: String? = null,
 ) : Parcelable

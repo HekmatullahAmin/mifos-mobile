@@ -10,45 +10,45 @@
 package org.mifos.mobile.core.model.entity.payload
 
 import kotlinx.serialization.Transient
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
 /**
  * Created by Rajan Maurya on 10/03/17.
  */
 
-@MyParcelize
+@Parcelize
 data class TransferPayload(
-    var fromOfficeId: Int? = null,
+    val fromOfficeId: Int? = null,
 
-    var fromClientId: Long? = null,
+    val fromClientId: Long? = null,
 
-    var fromAccountType: Int? = null,
+    val fromAccountType: Int? = null,
 
-    var fromAccountId: Int? = null,
+    val fromAccountId: Int? = null,
 
-    var toOfficeId: Int? = null,
+    val toOfficeId: Int? = null,
 
-    var toClientId: Long? = null,
+    val toClientId: Long? = null,
 
-    var toAccountType: Int? = null,
+    val toAccountType: Int? = null,
 
-    var toAccountId: Int? = null,
+    val toAccountId: Int? = null,
 
-    var transferDate: String? = null,
+    val transferDate: String? = null,
 
-    var transferAmount: Double? = null,
+    val transferAmount: Double? = null,
 
-    var transferDescription: String? = null,
+    val transferDescription: String? = null,
 
-    var dateFormat: String = "dd MMMM yyyy",
+    val dateFormat: String = "dd MMMM yyyy",
 
-    var locale: String = "en",
-
-    @Transient
-    var fromAccountNumber: String? = null,
+    val locale: String = "en",
 
     @Transient
-    var toAccountNumber: String? = null,
+    val fromAccountNumber: String? = null,
+
+    @Transient
+    val toAccountNumber: String? = null,
 
 ) : Parcelable

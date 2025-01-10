@@ -9,20 +9,20 @@
  */
 package org.mifos.mobile.core.model.entity.accounts.savings
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
-@MyParcelize
+@Parcelize
 data class SavingsAccountApplicationPayload(
 
-    var submittedOnDate: String? = null,
+    val submittedOnDate: String? = null,
 
-    var clientId: Int? = null,
+    val clientId: Int? = null,
 
-    var productId: Int? = null,
+    val productId: Int? = null,
 
-    var locale: String = "en",
+    val locale: String = "en",
 
-    var dateFormat: String = "dd MMMM yyyy",
+    val dateFormat: String = "dd MMMM yyyy",
 
 ) : Parcelable

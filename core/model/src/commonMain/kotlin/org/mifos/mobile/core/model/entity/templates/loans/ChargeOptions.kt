@@ -9,8 +9,8 @@
  */
 package org.mifos.mobile.core.model.entity.templates.loans
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 import org.mifos.mobile.core.model.entity.ChargeCalculationType
 import org.mifos.mobile.core.model.entity.ChargeTimeType
 
@@ -18,29 +18,29 @@ import org.mifos.mobile.core.model.entity.ChargeTimeType
  * Created by Rajan Maurya on 16/07/16.
  */
 
-@MyParcelize
+@Parcelize
 data class ChargeOptions(
 
-    var id: Int? = null,
+    val id: Int? = null,
 
-    var name: String? = null,
+    val name: String? = null,
 
-    var active: Boolean? = null,
+    val active: Boolean? = null,
 
-    var penalty: Boolean? = null,
+    val penalty: Boolean? = null,
 
-    var currency: Currency? = null,
+    val currency: Currency? = null,
 
-    var amount: Double? = null,
+    val amount: Double? = null,
 
-    var chargeTimeType: ChargeTimeType? = null,
+    val chargeTimeType: ChargeTimeType? = null,
 
-    var chargeAppliesTo: ChargeAppliesTo? = null,
+    val chargeAppliesTo: ChargeAppliesTo? = null,
 
-    var chargeCalculationType: ChargeCalculationType? = null,
+    val chargeCalculationType: ChargeCalculationType? = null,
 
-    var chargePaymentMode: ChargePaymentMode? = null,
+    val chargePaymentMode: ChargePaymentMode? = null,
 
-    var taxGroup: TaxGroup? = null,
+    val taxGroup: TaxGroup? = null,
 
 ) : Parcelable

@@ -23,20 +23,12 @@ android {
 kotlin {
     androidTarget {
         compilerOptions {
-            freeCompilerArgs.addAll("-P", "plugin:org.jetbrains.kotlin.parcelize:additionalAnnotation=org.mifos.mobile.core.model.MyParcelize")
+            freeCompilerArgs.addAll("-P", "plugin:org.jetbrains.kotlin.parcelize:additionalAnnotation=org.mifos.mobile.core.model.Parcelize")
         }
     }
     sourceSets {
-        androidMain.dependencies {
-            implementation(libs.jetbrains.kotlin.jdk7)
-            implementation(libs.squareup.retrofit.converter.gson)
-        }
         commonMain.dependencies {
             implementation(libs.kotlinx.serialization.json)
-        }
-        desktopMain.dependencies {
-            implementation(libs.jetbrains.kotlin.jdk7)
-            implementation(libs.squareup.retrofit.converter.gson)
         }
     }
 }

@@ -9,24 +9,24 @@
  */
 package org.mifos.mobile.core.model.entity.beneficiary
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 import org.mifos.mobile.core.model.entity.templates.account.AccountType
 
-@MyParcelize
+@Parcelize
 data class Beneficiary(
-    var id: Int? = null,
+    val id: Int? = null,
 
-    var name: String? = null,
+    val name: String? = null,
 
-    var officeName: String? = null,
+    val officeName: String? = null,
 
-    var clientName: String? = null,
+    val clientName: String? = null,
 
-    var accountType: AccountType? = null,
+    val accountType: AccountType? = null,
 
-    var accountNumber: String? = null,
+    val accountNumber: String? = null,
 
-    var transferLimit: Double? = null,
+    val transferLimit: Double? = null,
 
 ) : Parcelable

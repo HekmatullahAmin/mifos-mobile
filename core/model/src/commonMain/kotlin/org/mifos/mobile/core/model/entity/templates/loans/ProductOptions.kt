@@ -10,38 +10,38 @@
 package org.mifos.mobile.core.model.entity.templates.loans
 
 import kotlinx.serialization.SerialName
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
 /**
  * Created by Rajan Maurya on 16/07/16.
  */
 
-@MyParcelize
+@Parcelize
 data class ProductOptions(
 
-    var id: Int? = null,
+    val id: Int? = null,
 
-    var name: String? = null,
+    val name: String? = null,
 
-    var includeInBorrowerCycle: Boolean? = null,
+    val includeInBorrowerCycle: Boolean? = null,
 
-    var useBorrowerCycle: Boolean? = null,
+    val useBorrowerCycle: Boolean? = null,
 
     @SerialName("isLinkedToFloatingInterestRates")
-    var linkedToFloatingInterestRates: Boolean? = null,
+    val linkedToFloatingInterestRates: Boolean? = null,
 
     @SerialName("isFloatingInterestRateCalculationAllowed")
-    var floatingInterestRateCalculationAllowed: Boolean? = null,
+    val floatingInterestRateCalculationAllowed: Boolean? = null,
 
-    var allowVariableInstallments: Boolean? = null,
+    val allowvaliableInstallments: Boolean? = null,
 
     @SerialName("isInterestRecalculationEnabled")
-    var interestRecalculationEnabled: Boolean? = null,
+    val interestRecalculationEnabled: Boolean? = null,
 
-    var canDefineInstallmentAmount: Boolean? = null,
+    val canDefineInstallmentAmount: Boolean? = null,
 
-    var holdGuaranteeFunds: Boolean? = null,
+    val holdGuaranteeFunds: Boolean? = null,
 
-    var accountMovesOutOfNPAOnlyOnArrearsCompletion: Boolean? = null,
+    val accountMovesOutOfNPAOnlyOnArrearsCompletion: Boolean? = null,
 ) : Parcelable

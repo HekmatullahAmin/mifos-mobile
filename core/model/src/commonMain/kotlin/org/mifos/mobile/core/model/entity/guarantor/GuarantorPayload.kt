@@ -13,26 +13,26 @@ package org.mifos.mobile.core.model.entity.guarantor
  * Created by saksham on 24/July/2018
  */
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 import org.mifos.mobile.core.model.RawValue
 
-@MyParcelize
+@Parcelize
 data class GuarantorPayload(
 
-    var id: Long? = 0,
+    val id: Long? = 0,
 
-    var city: String? = null,
+    val city: String? = null,
 
-    var lastname: String? = null,
+    val lastname: String? = null,
 
-    var guarantorType: @RawValue GuarantorType? = null,
+    val guarantorType: @RawValue GuarantorType? = null,
 
-    var firstname: String? = null,
+    val firstname: String? = null,
 
-    var joinedDate: List<Int>? = null,
+    val joinedDate: List<Int>? = null,
 
-    var loanId: Long? = null,
+    val loanId: Long? = null,
 
-    var status: Boolean? = true,
+    val status: Boolean? = true,
 ) : Parcelable

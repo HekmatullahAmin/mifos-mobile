@@ -14,6 +14,6 @@ package org.mifos.mobile.core.model.entity.payload
  */
 
 data class AccountDetail(
-    var accountNumber: String?,
-    var accountType: String?,
+    val accountNumber: String?,
+    val accountType: String?,
 )

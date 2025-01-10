@@ -9,42 +9,42 @@
  */
 package org.mifos.mobile.core.model.entity.accounts.loan
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
 @Suppress("ktlint:standard:property-naming")
-@MyParcelize
+@Parcelize
 data class Timeline(
-    var submittedOnDate: List<Int>? = null,
+    val submittedOnDate: List<Int>? = null,
 
-    var submittedByUsername: String?,
+    val submittedByUsername: String?,
 
-    var submittedByFirstname: String?,
+    val submittedByFirstname: String?,
 
-    var submittedByLastname: String?,
+    val submittedByLastname: String?,
 
-    var approvedOnDate: List<Int>? = null,
+    val approvedOnDate: List<Int>? = null,
 
-    var approvedByUsername: String?,
+    val approvedByUsername: String?,
 
-    var approvedByFirstname: String?,
+    val approvedByFirstname: String?,
 
-    var approvedByLastname: String?,
+    val approvedByLastname: String?,
 
-    var expectedDisbursementDate: List<Int>? = null,
+    val expectedDisbursementDate: List<Int>? = null,
 
-    var actualDisbursementDate: List<Int>? = null,
+    val actualDisbursementDate: List<Int>? = null,
 
-    var disbursedByUsername: String?,
+    val disbursedByUsername: String?,
 
-    var disbursedByFirstname: String?,
+    val disbursedByFirstname: String?,
 
-    var disbursedByLastname: String?,
+    val disbursedByLastname: String?,
 
-    var closedOnDate: List<Int>? = null,
+    val closedOnDate: List<Int>? = null,
 
-    var expectedMaturityDate: List<Int>? = null,
+    val expectedMaturityDate: List<Int>? = null,
 
-    var withdrawnOnDate: List<Int>,
+    val withdrawnOnDate: List<Int>,
 
 ) : Parcelable

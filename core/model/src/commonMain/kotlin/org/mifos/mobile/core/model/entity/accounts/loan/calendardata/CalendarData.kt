@@ -9,54 +9,54 @@
  */
 package org.mifos.mobile.core.model.entity.accounts.loan.calendardata
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
-@MyParcelize
+@Parcelize
 data class CalendarData(
-    var id: Int? = null,
+    val id: Int? = null,
 
-    var calendarInstanceId: Int? = null,
+    val calendarInstanceId: Int? = null,
 
-    var entityId: Int? = null,
+    val entityId: Int? = null,
 
-    var entityType: EntityType,
+    val entityType: EntityType,
 
-    var title: String? = null,
+    val title: String? = null,
 
-    var startDate: List<Int> = ArrayList(),
+    val startDate: List<Int> = ArrayList(),
 
-    var endDate: List<Int> = ArrayList(),
+    val endDate: List<Int> = ArrayList(),
 
-    var duration: Double? = null,
+    val duration: Double? = null,
 
-    var type: Type,
+    val type: Type,
 
-    var repeating: Boolean? = null,
+    val repeating: Boolean? = null,
 
-    var recurrence: String? = null,
+    val recurrence: String? = null,
 
-    var frequency: Frequency,
+    val frequency: Frequency,
 
-    var interval: Double? = null,
+    val interval: Double? = null,
 
-    var repeatsOnNthDayOfMonth: RepeatsOnNthDayOfMonth,
+    val repeatsOnNthDayOfMonth: RepeatsOnNthDayOfMonth,
 
-    var firstReminder: Int? = null,
+    val firstReminder: Int? = null,
 
-    var secondReminder: Int? = null,
+    val secondReminder: Int? = null,
 
-    var humanReadable: String? = null,
+    val humanReadable: String? = null,
 
-    var createdDate: List<Int> = ArrayList(),
+    val createdDate: List<Int> = ArrayList(),
 
-    var lastUpdatedDate: List<Int> = ArrayList(),
+    val lastUpdatedDate: List<Int> = ArrayList(),
 
-    var createdByUserId: Int? = null,
+    val createdByUserId: Int? = null,
 
-    var createdByUsername: String? = null,
+    val createdByUsername: String? = null,
 
-    var lastUpdatedByUserId: Int? = null,
+    val lastUpdatedByUserId: Int? = null,
 
-    var lastUpdatedByUsername: String? = null,
+    val lastUpdatedByUsername: String? = null,
 ) : Parcelable

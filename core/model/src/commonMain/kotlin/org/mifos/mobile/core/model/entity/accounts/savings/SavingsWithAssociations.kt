@@ -9,58 +9,58 @@
  */
 package org.mifos.mobile.core.model.entity.accounts.savings
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 import org.mifos.mobile.core.model.entity.client.DepositType
 
-@MyParcelize
+@Parcelize
 data class SavingsWithAssociations(
 
-    var id: Long? = null,
+    val id: Long? = null,
 
-    var accountNo: String? = null,
+    val accountNo: String? = null,
 
-    var depositType: DepositType? = null,
+    val depositType: DepositType? = null,
 
-    var externalId: String? = null,
+    val externalId: String? = null,
 
-    var clientId: Int? = null,
+    val clientId: Int? = null,
 
-    var clientName: String? = null,
+    val clientName: String? = null,
 
-    var savingsProductId: Int? = null,
+    val savingsProductId: Int? = null,
 
-    var savingsProductName: String? = null,
+    val savingsProductName: String? = null,
 
-    var fieldOfficerId: Int? = null,
+    val fieldOfficerId: Int? = null,
 
-    var status: Status? = null,
+    val status: Status? = null,
 
-    var timeline: TimeLine? = null,
+    val timeline: TimeLine? = null,
 
-    var currency: Currency? = null,
+    val currency: Currency? = null,
 
-    internal var nominalAnnualInterestRate: Double? = null,
+    internal val nominalAnnualInterestRate: Double? = null,
 
-    var minRequiredOpeningBalance: Double? = null,
+    val minRequiredOpeningBalance: Double? = null,
 
-    var lockinPeriodFrequency: Double? = null,
+    val lockinPeriodFrequency: Double? = null,
 
-    var withdrawalFeeForTransfers: Boolean? = null,
+    val withdrawalFeeForTransfers: Boolean? = null,
 
-    var allowOverdraft: Boolean? = null,
+    val allowOverdraft: Boolean? = null,
 
-    var enforceMinRequiredBalance: Boolean? = null,
+    val enforceMinRequiredBalance: Boolean? = null,
 
-    var withHoldTax: Boolean? = null,
+    val withHoldTax: Boolean? = null,
 
-    var lastActiveTransactionDate: List<Int>? = null,
+    val lastActiveTransactionDate: List<Int>? = null,
 
-    var dormancyTrackingActive: Boolean? = null,
+    val dormancyTrackingActive: Boolean? = null,
 
-    var summary: Summary? = null,
+    val summary: Summary? = null,
 
-    var transactions: List<Transactions> = ArrayList(),
+    val transactions: List<Transactions> = ArrayList(),
 
 ) : Parcelable {
 
@@ -68,15 +68,13 @@ data class SavingsWithAssociations(
         return this.depositType != null && (this.depositType?.isRecurring() == true)
     }
 
-    fun setNominalAnnualInterestRate(nominalAnnualInterestRate: Double?) {
-        this.nominalAnnualInterestRate = nominalAnnualInterestRate
-    }
-
     fun getNominalAnnualInterestRate(): Double {
         return nominalAnnualInterestRate!!
     }
 
-    fun setNominalAnnualInterestRate(nominalAnnualInterestRate: Double) {
-        this.nominalAnnualInterestRate = nominalAnnualInterestRate
+    fun setNominalAnnualInterestRate(nominalAnnualInterestRate: Double?): SavingsWithAssociations {
+        return this.copy(
+            nominalAnnualInterestRate = nominalAnnualInterestRate,
+        )
     }
 }

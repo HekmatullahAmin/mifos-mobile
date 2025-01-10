@@ -10,8 +10,8 @@
 package org.mifos.mobile.core.model.entity.templates.loans
 
 import kotlinx.serialization.SerialName
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 import org.mifos.mobile.core.model.entity.accounts.loan.AmortizationType
 import org.mifos.mobile.core.model.entity.accounts.loan.DaysInMonthType
 import org.mifos.mobile.core.model.entity.accounts.loan.DaysInYearType
@@ -25,120 +25,120 @@ import org.mifos.mobile.core.model.entity.accounts.loan.TermPeriodFrequencyType
  * Created by Rajan Maurya on 15/07/16.
  */
 
-@MyParcelize
+@Parcelize
 data class LoanTemplate(
 
-    var clientId: Int? = null,
+    val clientId: Int? = null,
 
-    var clientAccountNo: String? = null,
+    val clientAccountNo: String? = null,
 
-    var clientName: String? = null,
+    val clientName: String? = null,
 
-    var clientOfficeId: Int? = null,
+    val clientOfficeId: Int? = null,
 
-    var loanProductName: String? = null,
+    val loanProductName: String? = null,
 
     @SerialName("isLoanProductLinkedToFloatingRate")
-    var loanProductLinkedToFloatingRate: Boolean? = null,
+    val loanProductLinkedToFloatingRate: Boolean? = null,
 
-    var fundId: Int? = null,
+    val fundId: Int? = null,
 
-    var fundName: String? = null,
+    val fundName: String? = null,
 
-    var currency: Currency? = null,
+    val currency: Currency? = null,
 
-    var principal: Double? = null,
+    val principal: Double? = null,
 
-    var approvedPrincipal: Double? = null,
+    val approvedPrincipal: Double? = null,
 
-    var proposedPrincipal: Double? = null,
+    val proposedPrincipal: Double? = null,
 
-    var termFrequency: Int? = null,
+    val termFrequency: Int? = null,
 
-    var termPeriodFrequencyType: TermPeriodFrequencyType? = null,
+    val termPeriodFrequencyType: TermPeriodFrequencyType? = null,
 
-    var numberOfRepayments: Int? = null,
+    val numberOfRepayments: Int? = null,
 
-    var repaymentEvery: Int? = null,
+    val repaymentEvery: Int? = null,
 
-    var repaymentFrequencyType: RepaymentFrequencyType? = null,
+    val repaymentFrequencyType: RepaymentFrequencyType? = null,
 
-    var interestRatePerPeriod: Double? = null,
+    val interestRatePerPeriod: Double? = null,
 
-    var interestRateFrequencyType: InterestRateFrequencyType? = null,
+    val interestRateFrequencyType: InterestRateFrequencyType? = null,
 
-    var annualInterestRate: Double? = null,
+    val annualInterestRate: Double? = null,
 
     @SerialName("isFloatingInterestRate")
-    var floatingInterestRate: Boolean? = null,
+    val floatingInterestRate: Boolean? = null,
 
-    var amortizationType: AmortizationType? = null,
+    val amortizationType: AmortizationType? = null,
 
-    var interestType: InterestType? = null,
+    val interestType: InterestType? = null,
 
-    var interestCalculationPeriodType: InterestCalculationPeriodType? = null,
+    val interestCalculationPeriodType: InterestCalculationPeriodType? = null,
 
-    var allowPartialPeriodInterestCalcualtion: Boolean? = null,
+    val allowPartialPeriodInterestCalcualtion: Boolean? = null,
 
-    var transactionProcessingStrategyId: Int? = null,
+    val transactionProcessingStrategyId: Int? = null,
 
-    var graceOnArrearsAgeing: Int? = null,
+    val graceOnArrearsAgeing: Int? = null,
 
-    var timeline: Timeline? = null,
+    val timeline: Timeline? = null,
 
-    var productOptions: List<ProductOptions> = ArrayList(),
+    val productOptions: List<ProductOptions> = ArrayList(),
 
-    var loanOfficerOptions: List<LoanOfficerOptions> = ArrayList(),
+    val loanOfficerOptions: List<LoanOfficerOptions> = ArrayList(),
 
-    var loanPurposeOptions: List<LoanPurposeOptions> = ArrayList(),
+    val loanPurposeOptions: List<LoanPurposeOptions> = ArrayList(),
 
-    var fundOptions: List<FundOptions> = ArrayList(),
+    val fundOptions: List<FundOptions> = ArrayList(),
 
-    var termFrequencyTypeOptions: List<TermFrequencyTypeOptions> = ArrayList(),
+    val termFrequencyTypeOptions: List<TermFrequencyTypeOptions> = ArrayList(),
 
-    var repaymentFrequencyTypeOptions: List<RepaymentFrequencyTypeOptions> = ArrayList(),
+    val repaymentFrequencyTypeOptions: List<RepaymentFrequencyTypeOptions> = ArrayList(),
 
-    var repaymentFrequencyNthDayTypeOptions: List<RepaymentFrequencyNthDayTypeOptions> = ArrayList(),
+    val repaymentFrequencyNthDayTypeOptions: List<RepaymentFrequencyNthDayTypeOptions> = ArrayList(),
 
-    var repaymentFrequencyDaysOfWeekTypeOptions: List<RepaymentFrequencyDaysOfWeekTypeOptions> = ArrayList(),
+    val repaymentFrequencyDaysOfWeekTypeOptions: List<RepaymentFrequencyDaysOfWeekTypeOptions> = ArrayList(),
 
-    var interestRateFrequencyTypeOptions: List<InterestRateFrequencyTypeOptions> = ArrayList(),
+    val interestRateFrequencyTypeOptions: List<InterestRateFrequencyTypeOptions> = ArrayList(),
 
-    var amortizationTypeOptions: List<AmortizationTypeOptions> = ArrayList(),
+    val amortizationTypeOptions: List<AmortizationTypeOptions> = ArrayList(),
 
-    var interestTypeOptions: List<InterestTypeOptions> = ArrayList(),
+    val interestTypeOptions: List<InterestTypeOptions> = ArrayList(),
 
-    var interestCalculationPeriodTypeOptions: List<InterestCalculationPeriodType> = ArrayList(),
+    val interestCalculationPeriodTypeOptions: List<InterestCalculationPeriodType> = ArrayList(),
 
-    var transactionProcessingStrategyOptions: List<TransactionProcessingStrategyOptions> = ArrayList(),
+    val transactionProcessingStrategyOptions: List<TransactionProcessingStrategyOptions> = ArrayList(),
 
-    var chargeOptions: List<ChargeOptions> = ArrayList(),
+    val chargeOptions: List<ChargeOptions> = ArrayList(),
 
-    var loanCollateralOptions: List<LoanCollateralOptions> = ArrayList(),
+    val loanCollateralOptions: List<LoanCollateralOptions> = ArrayList(),
 
-    var multiDisburseLoan: Boolean? = null,
+    val multiDisburseLoan: Boolean? = null,
 
-    var canDefineInstallmentAmount: Boolean? = null,
+    val canDefineInstallmentAmount: Boolean? = null,
 
-    var canDisburse: Boolean? = null,
+    val canDisburse: Boolean? = null,
 
-    var product: Product? = null,
+    val product: Product? = null,
 
-    var daysInMonthType: DaysInMonthType? = null,
+    val daysInMonthType: DaysInMonthType? = null,
 
-    var daysInYearType: DaysInYearType? = null,
+    val daysInYearType: DaysInYearType? = null,
 
     @SerialName("isInterestRecalculationEnabled")
-    var interestRecalculationEnabled: Boolean? = null,
+    val interestRecalculationEnabled: Boolean? = null,
 
-    @SerialName("isVariableInstallmentsAllowed")
-    var variableInstallmentsAllowed: Boolean? = null,
+    @SerialName("isvaliableInstallmentsAllowed")
+    val valiableInstallmentsAllowed: Boolean? = null,
 
-    var minimumGap: Int? = null,
+    val minimumGap: Int? = null,
 
-    var maximumGap: Int? = null,
+    val maximumGap: Int? = null,
 
-    var accountLinkingOptions: List<AccountLinkingOptions> = ArrayList(),
+    val accountLinkingOptions: List<AccountLinkingOptions> = ArrayList(),
 
 ) : Parcelable {
     /**

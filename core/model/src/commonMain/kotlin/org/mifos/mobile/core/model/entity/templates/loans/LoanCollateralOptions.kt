@@ -9,23 +9,23 @@
  */
 package org.mifos.mobile.core.model.entity.templates.loans
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
 /**
  * Created by Rajan Maurya on 16/07/16.
  */
 
-@MyParcelize
+@Parcelize
 data class LoanCollateralOptions(
 
-    var id: Int? = null,
+    val id: Int? = null,
 
-    var name: String? = null,
+    val name: String? = null,
 
-    var position: Int? = null,
+    val position: Int? = null,
 
-    var description: String? = null,
+    val description: String? = null,
 
-    var active: Boolean? = null,
+    val active: Boolean? = null,
 ) : Parcelable

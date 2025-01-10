@@ -14,6 +14,6 @@ package org.mifos.mobile.core.model.entity.register
  */
 
 data class UserVerify(
-    var requestId: String? = null,
-    var authenticationToken: String? = null,
+    val requestId: String? = null,
+    val authenticationToken: String? = null,
 )

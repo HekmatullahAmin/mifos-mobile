@@ -9,9 +9,7 @@
  */
 package org.mifos.mobile.core.model.entity.beneficiary
 
-import org.mifos.mobile.core.model.OverloadSupport
-
-data class BeneficiaryUpdatePayload @OverloadSupport constructor(
-    var name: String? = null,
-    var transferLimit: Float = 0f,
+data class BeneficiaryUpdatePayload constructor(
+    val name: String? = null,
+    val transferLimit: Float = 0f,
 )

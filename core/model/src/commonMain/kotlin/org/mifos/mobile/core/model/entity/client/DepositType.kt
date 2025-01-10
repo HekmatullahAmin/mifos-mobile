@@ -9,19 +9,19 @@
  */
 package org.mifos.mobile.core.model.entity.client
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
 // TODO: Create a constant for Endpoints enums
 private const val SAVINGS_ACCOUNTS = "savingsaccounts"
 private const val RECURRING_ACCOUNTS = "recurringdepositaccounts"
 
-@MyParcelize
+@Parcelize
 data class DepositType(
-    var id: Int? = null,
-    var code: String? = null,
+    val id: Int? = null,
+    val code: String? = null,
 
-    var value: String? = null,
+    val value: String? = null,
 ) : Parcelable {
 
     fun isRecurring(): Boolean {

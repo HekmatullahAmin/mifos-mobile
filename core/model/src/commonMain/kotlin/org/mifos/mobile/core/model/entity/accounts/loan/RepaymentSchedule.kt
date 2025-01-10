@@ -9,41 +9,41 @@
  */
 package org.mifos.mobile.core.model.entity.accounts.loan
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
-@MyParcelize
+@Parcelize
 data class RepaymentSchedule(
-    var currency: Currency? = null,
+    val currency: Currency? = null,
 
-    var loanTermInDays: Int? = null,
+    val loanTermInDays: Int? = null,
 
-    var totalPrincipalDisbursed: Double? = null,
+    val totalPrincipalDisbursed: Double? = null,
 
-    var totalPrincipalExpected: Double? = null,
+    val totalPrincipalExpected: Double? = null,
 
-    var totalPrincipalPaid: Double? = null,
+    val totalPrincipalPaid: Double? = null,
 
-    var totalInterestCharged: Double? = null,
+    val totalInterestCharged: Double? = null,
 
-    var totalFeeChargesCharged: Double? = null,
+    val totalFeeChargesCharged: Double? = null,
 
-    var totalPenaltyChargesCharged: Double? = null,
+    val totalPenaltyChargesCharged: Double? = null,
 
-    var totalWaived: Double? = null,
+    val totalWaived: Double? = null,
 
-    var totalWrittenOff: Double? = null,
+    val totalWrittenOff: Double? = null,
 
-    var totalRepaymentExpected: Double? = null,
+    val totalRepaymentExpected: Double? = null,
 
-    var totalRepayment: Double? = null,
+    val totalRepayment: Double? = null,
 
-    var totalPaidInAdvance: Double? = null,
+    val totalPaidInAdvance: Double? = null,
 
-    var totalPaidLate: Double? = null,
+    val totalPaidLate: Double? = null,
 
-    var totalOutstanding: Double? = null,
+    val totalOutstanding: Double? = null,
 
-    var periods: List<Periods> = ArrayList(),
+    val periods: List<Periods> = ArrayList(),
 
 ) : Parcelable

@@ -15,5 +15,5 @@ package org.mifos.mobile.core.model.entity.notification
 
 data class NotificationUserDetail(
 
-    var id: Int = 0,
+    val id: Int = 0,
 )

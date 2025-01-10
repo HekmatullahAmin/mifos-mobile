@@ -9,16 +9,16 @@
  */
 package org.mifos.mobile.core.model.entity
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
 /**
  * Created by michaelsosnick on 12/11/16.
  */
 
-@MyParcelize
+@Parcelize
 data class ChargeTimeType(
-    var id: Int = 0,
-    var code: String? = null,
-    var value: String? = null,
+    val id: Int = 0,
+    val code: String? = null,
+    val value: String? = null,
 ) : Parcelable

@@ -13,18 +13,18 @@ package org.mifos.mobile.core.model.entity.templates.savings
  * Created by saksham on 01/July/2018
  */
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
-@MyParcelize
+@Parcelize
 data class SavingsAccountTemplate(
-    var clientId: Int = 0,
-    var clientName: String? = null,
-    var withdrawalFeeForTransfers: Boolean? = null,
-    var allowOverdraft: Boolean? = null,
-    var enforceMinRequiredBalance: Boolean? = null,
-    var withHoldTax: Boolean? = null,
-    var isDormancyTrackingActive: Boolean? = null,
-    var productOptions: ArrayList<ProductOptions> = ArrayList<ProductOptions>(),
-    var chargeOptions: ArrayList<ChargeOptions> = ArrayList<ChargeOptions>(),
+    val clientId: Int = 0,
+    val clientName: String? = null,
+    val withdrawalFeeForTransfers: Boolean? = null,
+    val allowOverdraft: Boolean? = null,
+    val enforceMinRequiredBalance: Boolean? = null,
+    val withHoldTax: Boolean? = null,
+    val isDormancyTrackingActive: Boolean? = null,
+    val productOptions: ArrayList<ProductOptions> = ArrayList<ProductOptions>(),
+    val chargeOptions: ArrayList<ChargeOptions> = ArrayList<ChargeOptions>(),
 ) : Parcelable

@@ -9,27 +9,27 @@
  */
 package org.mifos.mobile.core.model.entity.templates.loans
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
 /**
  * Created by Rajan Maurya on 16/07/16.
  */
 
-@MyParcelize
+@Parcelize
 data class Currency(
 
-    var code: String? = null,
+    val code: String? = null,
 
-    var name: String? = null,
+    val name: String? = null,
 
-    var decimalPlaces: Double? = null,
+    val decimalPlaces: Double? = null,
 
-    var inMultiplesOf: Int? = null,
+    val inMultiplesOf: Int? = null,
 
-    var displaySymbol: String? = null,
+    val displaySymbol: String? = null,
 
-    var nameCode: String? = null,
+    val nameCode: String? = null,
 
-    var displayLabel: String? = null,
+    val displayLabel: String? = null,
 ) : Parcelable

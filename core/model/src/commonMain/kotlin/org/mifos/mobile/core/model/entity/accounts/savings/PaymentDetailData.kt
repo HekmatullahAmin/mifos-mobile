@@ -9,22 +9,22 @@
  */
 package org.mifos.mobile.core.model.entity.accounts.savings
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
-@MyParcelize
+@Parcelize
 data class PaymentDetailData(
-    var id: Int? = null,
+    val id: Int? = null,
 
-    var paymentType: PaymentType,
+    val paymentType: PaymentType,
 
-    var accountNumber: String? = null,
+    val accountNumber: String? = null,
 
-    var checkNumber: String? = null,
+    val checkNumber: String? = null,
 
-    var routingCode: String? = null,
+    val routingCode: String? = null,
 
-    var receiptNumber: String? = null,
+    val receiptNumber: String? = null,
 
-    var bankNumber: String? = null,
+    val bankNumber: String? = null,
 ) : Parcelable

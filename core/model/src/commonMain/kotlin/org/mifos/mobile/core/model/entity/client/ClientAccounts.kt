@@ -9,18 +9,18 @@
  */
 package org.mifos.mobile.core.model.entity.client
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 import org.mifos.mobile.core.model.entity.accounts.loan.LoanAccount
 import org.mifos.mobile.core.model.entity.accounts.savings.SavingAccount
 import org.mifos.mobile.core.model.entity.accounts.share.ShareAccount
 
-@MyParcelize
+@Parcelize
 data class ClientAccounts(
-    var loanAccounts: List<LoanAccount> = ArrayList(),
-    var savingsAccounts: List<SavingAccount>? = ArrayList(),
+    val loanAccounts: List<LoanAccount> = ArrayList(),
+    val savingsAccounts: List<SavingAccount>? = ArrayList(),
 
-    var shareAccounts: List<ShareAccount> = ArrayList(),
+    val shareAccounts: List<ShareAccount> = ArrayList(),
 
 ) : Parcelable {
 

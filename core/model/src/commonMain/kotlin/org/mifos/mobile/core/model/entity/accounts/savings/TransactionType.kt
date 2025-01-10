@@ -9,42 +9,42 @@
  */
 package org.mifos.mobile.core.model.entity.accounts.savings
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
-@MyParcelize
+@Parcelize
 data class TransactionType(
-    var id: Int? = null,
-    var code: String? = null,
+    val id: Int? = null,
+    val code: String? = null,
 
-    var value: String? = null,
+    val value: String? = null,
 
-    var deposit: Boolean? = null,
+    val deposit: Boolean? = null,
 
-    var dividendPayout: Boolean? = null,
+    val dividendPayout: Boolean? = null,
 
-    var withdrawal: Boolean? = null,
+    val withdrawal: Boolean? = null,
 
-    var interestPosting: Boolean? = null,
+    val interestPosting: Boolean? = null,
 
-    var feeDeduction: Boolean? = null,
+    val feeDeduction: Boolean? = null,
 
-    var initiateTransfer: Boolean? = null,
+    val initiateTransfer: Boolean? = null,
 
-    var approveTransfer: Boolean? = null,
+    val approveTransfer: Boolean? = null,
 
-    var withdrawTransfer: Boolean? = null,
+    val withdrawTransfer: Boolean? = null,
 
-    var rejectTransfer: Boolean? = null,
+    val rejectTransfer: Boolean? = null,
 
-    var overdraftInterest: Boolean? = null,
+    val overdraftInterest: Boolean? = null,
 
-    var writtenoff: Boolean? = null,
+    val writtenoff: Boolean? = null,
 
-    var overdraftFee: Boolean? = null,
+    val overdraftFee: Boolean? = null,
 
-    var withholdTax: Boolean? = null,
+    val withholdTax: Boolean? = null,
 
-    var escheat: Boolean? = null,
+    val escheat: Boolean? = null,
 
 ) : Parcelable

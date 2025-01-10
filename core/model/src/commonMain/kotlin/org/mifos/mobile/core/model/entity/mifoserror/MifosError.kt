@@ -9,14 +9,14 @@
  */
 package org.mifos.mobile.core.model.entity.mifoserror
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
-@MyParcelize
+@Parcelize
 data class MifosError(
-    var developerMessage: String? = null,
-    var httpStatusCode: String? = null,
-    var defaultUserMessage: String? = null,
-    var userMessageGlobalisationCode: String? = null,
-    var errors: List<Errors> = ArrayList(),
+    val developerMessage: String? = null,
+    val httpStatusCode: String? = null,
+    val defaultUserMessage: String? = null,
+    val userMessageGlobalisationCode: String? = null,
+    val errors: List<Errors> = ArrayList(),
 ) : Parcelable

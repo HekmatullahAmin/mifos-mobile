@@ -9,13 +9,13 @@
  */
 package org.mifos.mobile.core.model.entity.client
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
-@MyParcelize
+@Parcelize
 data class ClientClassification(
-    var id: Int,
-    var name: String? = null,
-    var active: Boolean,
-    var mandatory: Boolean,
+    val id: Int,
+    val name: String? = null,
+    val active: Boolean,
+    val mandatory: Boolean,
 ) : Parcelable

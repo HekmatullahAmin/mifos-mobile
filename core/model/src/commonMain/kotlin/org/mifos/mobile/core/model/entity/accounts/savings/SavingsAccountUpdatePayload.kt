@@ -9,14 +9,14 @@
  */
 package org.mifos.mobile.core.model.entity.accounts.savings
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
-@MyParcelize
+@Parcelize
 data class SavingsAccountUpdatePayload(
 
-    var clientId: Long? = 0,
+    val clientId: Long? = 0,
 
-    var productId: Long? = 0,
+    val productId: Long? = 0,
 
 ) : Parcelable

@@ -10,15 +10,15 @@
 package org.mifos.mobile.core.model.entity
 
 import kotlinx.serialization.Serializable
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
-@MyParcelize
+@Parcelize
 @Serializable
 data class MifosNotification(
-    var timeStamp: Long,
-    var msg: String? = null,
-    var read: Boolean? = null,
+    val timeStamp: Long,
+    val msg: String? = null,
+    val read: Boolean? = null,
 ) : Parcelable {
     fun isRead(): Boolean {
         return read == true

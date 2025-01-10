@@ -9,13 +9,13 @@
  */
 package org.mifos.mobile.core.model.entity.accounts.savings
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
-@MyParcelize
+@Parcelize
 data class SavingsAccountWithdrawPayload(
-    var locale: String = "en",
-    var dateFormat: String = "dd MMMM yyyy",
-    var withdrawnOnDate: String? = null,
-    var note: String? = null,
+    val locale: String = "en",
+    val dateFormat: String = "dd MMMM yyyy",
+    val withdrawnOnDate: String? = null,
+    val note: String? = null,
 ) : Parcelable

@@ -9,16 +9,16 @@
  */
 package org.mifos.mobile.core.model.entity.guarantor
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
 /*
  * Created by saksham on 23/July/2018
  */
 
-@MyParcelize
+@Parcelize
 class GuarantorType(
-    var id: Long? = null,
-    var value: String? = null,
-    var code: String? = null,
+    val id: Long? = null,
+    val value: String? = null,
+    val code: String? = null,
 ) : Parcelable

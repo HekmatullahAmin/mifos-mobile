@@ -9,15 +9,15 @@
  */
 package org.mifos.mobile.core.model.entity.accounts.loan
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
-@MyParcelize
+@Parcelize
 data class LoanWithdraw(
-    var withdrawnOnDate: String? = null,
+    val withdrawnOnDate: String? = null,
 
-    var note: String? = null,
+    val note: String? = null,
 
-    internal var dateFormat: String = "dd MMMM yyyy",
-    internal var locale: String = "en",
+    internal val dateFormat: String = "dd MMMM yyyy",
+    internal val locale: String = "en",
 ) : Parcelable

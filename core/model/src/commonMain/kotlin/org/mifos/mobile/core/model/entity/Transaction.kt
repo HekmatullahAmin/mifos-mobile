@@ -9,8 +9,8 @@
  */
 package org.mifos.mobile.core.model.entity
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 import org.mifos.mobile.core.model.entity.client.Type
 
 /**
@@ -18,25 +18,25 @@ import org.mifos.mobile.core.model.entity.client.Type
  * @since 10/8/16.
  */
 
-@MyParcelize
+@Parcelize
 data class Transaction(
 
-    var id: Long? = null,
+    val id: Long? = null,
 
-    var officeId: Long? = null,
+    val officeId: Long? = null,
 
-    var officeName: String? = null,
+    val officeName: String? = null,
 
-    var type: Type,
+    val type: Type,
 
-    var date: List<Int> = ArrayList(),
+    val date: List<Int> = ArrayList(),
 
-    var currency: Currency? = null,
+    val currency: Currency? = null,
 
-    var amount: Double? = null,
+    val amount: Double? = null,
 
-    var submittedOnDate: List<Int> = ArrayList(),
+    val submittedOnDate: List<Int> = ArrayList(),
 
-    var reversed: Boolean? = null,
+    val reversed: Boolean? = null,
 
 ) : Parcelable

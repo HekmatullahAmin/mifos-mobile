@@ -15,19 +15,19 @@ package org.mifos.mobile.core.model.entity.register
 
 data class RegisterPayload(
 
-    var username: String? = null,
+    val username: String? = null,
 
-    var firstName: String? = null,
+    val firstName: String? = null,
 
-    var lastName: String? = null,
+    val lastName: String? = null,
 
-    var email: String? = null,
+    val email: String? = null,
 
-    var mobileNumber: String? = null,
+    val mobileNumber: String? = null,
 
-    var accountNumber: String? = null,
+    val accountNumber: String? = null,
 
-    var password: String? = null,
+    val password: String? = null,
 
-    var authenticationMode: String? = null,
+    val authenticationMode: String? = null,
 )

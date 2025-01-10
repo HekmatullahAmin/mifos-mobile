@@ -10,31 +10,31 @@
 package org.mifos.mobile.core.model.entity.accounts.loan
 
 import kotlinx.serialization.SerialName
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 import org.mifos.mobile.core.model.entity.accounts.loan.calendardata.CalendarData
 
-@MyParcelize
+@Parcelize
 data class InterestRecalculationData(
-    var id: Int? = null,
+    val id: Int? = null,
 
-    var loanId: Int? = null,
+    val loanId: Int? = null,
 
-    var interestRecalculationCompoundingType: InterestRecalculationCompoundingType? = null,
+    val interestRecalculationCompoundingType: InterestRecalculationCompoundingType? = null,
 
-    var rescheduleStrategyType: RescheduleStrategyType? = null,
+    val rescheduleStrategyType: RescheduleStrategyType? = null,
 
-    var calendarData: CalendarData,
+    val calendarData: CalendarData,
 
-    var recalculationRestFrequencyType: RecalculationRestFrequencyType? = null,
+    val recalculationRestFrequencyType: RecalculationRestFrequencyType? = null,
 
-    var recalculationRestFrequencyInterval: Double? = null,
+    val recalculationRestFrequencyInterval: Double? = null,
 
-    var recalculationCompoundingFrequencyType: RecalculationCompoundingFrequencyType? = null,
+    val recalculationCompoundingFrequencyType: RecalculationCompoundingFrequencyType? = null,
 
     @SerialName("isCompoundingToBePostedAsTransaction")
-    var compoundingToBePostedAsTransaction: Boolean? = null,
+    val compoundingToBePostedAsTransaction: Boolean? = null,
 
-    var allowCompoundingOnEod: Boolean? = null,
+    val allowCompoundingOnEod: Boolean? = null,
 
 ) : Parcelable

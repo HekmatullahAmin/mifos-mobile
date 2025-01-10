@@ -9,46 +9,34 @@
  */
 package org.mifos.mobile.core.model.entity.accounts.share
 
-import org.mifos.mobile.core.model.Expose
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
-@MyParcelize
+@Parcelize
 data class Timeline(
-    @Expose
-    var submittedOnDate: List<Int>? = null,
 
-    @Expose
-    var submittedByUsername: String? = null,
+    val submittedOnDate: List<Int>? = null,
 
-    @Expose
-    var submittedByFirstname: String? = null,
+    val submittedByUsername: String? = null,
 
-    @Expose
-    var submittedByLastname: String? = null,
+    val submittedByFirstname: String? = null,
 
-    @Expose
-    var approvedDate: List<Int>? = null,
+    val submittedByLastname: String? = null,
 
-    @Expose
-    var approvedByUsername: String? = null,
+    val approvedDate: List<Int>? = null,
 
-    @Expose
-    var approvedByFirstname: String? = null,
+    val approvedByUsername: String? = null,
 
-    @Expose
-    var approvedByLastname: String? = null,
+    val approvedByFirstname: String? = null,
 
-    @Expose
-    var activatedDate: List<Int>? = null,
+    val approvedByLastname: String? = null,
 
-    @Expose
-    var activatedByUsername: String? = null,
+    val activatedDate: List<Int>? = null,
 
-    @Expose
-    var activatedByFirstname: String? = null,
+    val activatedByUsername: String? = null,
 
-    @Expose
-    var activatedByLastname: String? = null,
+    val activatedByFirstname: String? = null,
+
+    val activatedByLastname: String? = null,
 
 ) : Parcelable

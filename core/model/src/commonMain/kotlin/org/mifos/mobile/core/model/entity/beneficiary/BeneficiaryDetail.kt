@@ -9,4 +9,4 @@
  */
 package org.mifos.mobile.core.model.entity.beneficiary
 
-class BeneficiaryDetail(var accountNumber: String?, var beneficiaryName: String?)
+class BeneficiaryDetail(val accountNumber: String?, val beneficiaryName: String?)

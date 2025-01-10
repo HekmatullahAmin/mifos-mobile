@@ -9,19 +9,19 @@
  */
 package org.mifos.mobile.core.model.entity.templates.loans
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
 /**
  * Created by Rajan Maurya on 16/07/16.
  */
 
-@MyParcelize
+@Parcelize
 data class AmortizationTypeOptions(
 
-    var id: Int? = null,
+    val id: Int? = null,
 
-    var code: String? = null,
+    val code: String? = null,
 
-    var value: String? = null,
+    val value: String? = null,
 ) : Parcelable

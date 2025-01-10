@@ -9,29 +9,29 @@
  */
 package org.mifos.mobile.core.model.entity.templates.loans
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
 /**
  * Created by Tarun on 12/16/2016.
  */
 
-@MyParcelize
+@Parcelize
 data class AccountLinkingOptions(
 
-    var accountNo: String? = null,
+    val accountNo: String? = null,
 
-    var clientId: Int? = null,
+    val clientId: Int? = null,
 
-    var clientName: String? = null,
+    val clientName: String? = null,
 
-    var currency: Currency? = null,
+    val currency: Currency? = null,
 
-    var fieldOfficerId: Int? = null,
+    val fieldOfficerId: Int? = null,
 
-    var id: Int? = null,
+    val id: Int? = null,
 
-    var productId: Int? = null,
+    val productId: Int? = null,
 
-    var productName: String? = null,
+    val productName: String? = null,
 ) : Parcelable

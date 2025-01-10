@@ -9,20 +9,20 @@
  */
 package org.mifos.mobile.core.model.entity.templates.savings
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 import org.mifos.mobile.core.model.entity.Currency
 
-@MyParcelize
+@Parcelize
 data class ChargeOptions(
-    var id: Int? = null,
-    var name: String? = null,
-    var active: Boolean? = null,
-    var penalty: Boolean? = null,
-    var currency: Currency? = null,
-    var amount: Float = 0.toFloat(),
-    var chargeTimeType: ChargeTimeType,
-    var chargeAppliesTo: ChargeAppliesTo,
-    var chargeCalculationType: ChargeCalculationType,
-    var chargePaymentMode: ChargePaymentMode,
+    val id: Int? = null,
+    val name: String? = null,
+    val active: Boolean? = null,
+    val penalty: Boolean? = null,
+    val currency: Currency? = null,
+    val amount: Float = 0.toFloat(),
+    val chargeTimeType: ChargeTimeType,
+    val chargeAppliesTo: ChargeAppliesTo,
+    val chargeCalculationType: ChargeCalculationType,
+    val chargePaymentMode: ChargePaymentMode,
 ) : Parcelable

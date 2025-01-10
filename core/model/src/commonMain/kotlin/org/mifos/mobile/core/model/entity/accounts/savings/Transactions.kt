@@ -9,33 +9,33 @@
  */
 package org.mifos.mobile.core.model.entity.accounts.savings
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
-@MyParcelize
+@Parcelize
 data class Transactions(
-    var id: Int? = null,
+    val id: Int? = null,
 
-    var transactionType: TransactionType? = null,
+    val transactionType: TransactionType? = null,
 
-    var accountId: Int? = null,
+    val accountId: Int? = null,
 
-    var accountNo: String? = null,
+    val accountNo: String? = null,
 
-    var date: List<Int> = ArrayList(),
+    val date: List<Int> = ArrayList(),
 
-    var currency: Currency? = null,
+    val currency: Currency? = null,
 
-    var paymentDetailData: PaymentDetailData? = null,
+    val paymentDetailData: PaymentDetailData? = null,
 
-    var amount: Double? = null,
+    val amount: Double? = null,
 
-    var runningBalance: Double? = null,
+    val runningBalance: Double? = null,
 
-    var reversed: Boolean? = null,
+    val reversed: Boolean? = null,
 
-    var submittedOnDate: List<Int>? = null,
+    val submittedOnDate: List<Int>? = null,
 
-    var interestedPostedAsOn: Boolean? = null,
+    val interestedPostedAsOn: Boolean? = null,
 
 ) : Parcelable

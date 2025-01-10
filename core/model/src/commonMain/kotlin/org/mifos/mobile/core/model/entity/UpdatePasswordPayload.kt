@@ -14,7 +14,7 @@ package org.mifos.mobile.core.model.entity
 */
 class UpdatePasswordPayload {
 
-    var password: String? = null
+    val password: String? = null
 
-    var repeatPassword: String? = null
+    val repeatPassword: String? = null
 }

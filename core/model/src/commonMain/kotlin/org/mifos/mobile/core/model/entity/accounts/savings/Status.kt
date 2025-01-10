@@ -9,34 +9,34 @@
  */
 package org.mifos.mobile.core.model.entity.accounts.savings
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
-@MyParcelize
+@Parcelize
 data class Status(
-    var id: Int? = null,
-    var code: String? = null,
+    val id: Int? = null,
+    val code: String? = null,
 
-    var value: String? = null,
+    val value: String? = null,
 
-    var submittedAndPendingApproval: Boolean? = null,
+    val submittedAndPendingApproval: Boolean? = null,
 
-    var approved: Boolean? = null,
+    val approved: Boolean? = null,
 
-    var rejected: Boolean? = null,
+    val rejected: Boolean? = null,
 
-    var withdrawnByApplicant: Boolean? = null,
+    val withdrawnByApplicant: Boolean? = null,
 
-    var active: Boolean? = null,
+    val active: Boolean? = null,
 
-    var closed: Boolean? = null,
+    val closed: Boolean? = null,
 
-    var prematureClosed: Boolean? = null,
+    val prematureClosed: Boolean? = null,
 
-    internal var transferInProgress: Boolean? = null,
+    internal val transferInProgress: Boolean? = null,
 
-    internal var transferOnHold: Boolean? = null,
+    internal val transferOnHold: Boolean? = null,
 
-    var matured: Boolean? = null,
+    val matured: Boolean? = null,
 
 ) : Parcelable

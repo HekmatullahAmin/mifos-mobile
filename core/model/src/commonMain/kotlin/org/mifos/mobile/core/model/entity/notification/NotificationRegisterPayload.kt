@@ -14,6 +14,6 @@ package org.mifos.mobile.core.model.entity.notification
  */
 
 data class NotificationRegisterPayload(
-    var clientId: Long,
-    var registrationId: String,
+    val clientId: Long,
+    val registrationId: String,
 )

@@ -9,40 +9,30 @@
  */
 package org.mifos.mobile.core.model.entity.accounts.share
 
-import org.mifos.mobile.core.model.Expose
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 import org.mifos.mobile.core.model.entity.accounts.Account
 import org.mifos.mobile.core.model.entity.accounts.savings.Currency
 
-@MyParcelize
+@Parcelize
 data class ShareAccount(
 
-    @Expose
-    var accountNo: String? = null,
+    val accountNo: String? = null,
 
-    @Expose
-    var totalApprovedShares: Int? = null,
+    val totalApprovedShares: Int? = null,
 
-    @Expose
-    var totalPendingForApprovalShares: Int? = null,
+    val totalPendingForApprovalShares: Int? = null,
 
-    @Expose
-    var productId: Int? = null,
+    val productId: Int? = null,
 
-    @Expose
-    var productName: String? = null,
+    val productName: String? = null,
 
-    @Expose
-    var shortProductName: String? = null,
+    val shortProductName: String? = null,
 
-    @Expose
-    var status: Status? = null,
+    val status: Status? = null,
 
-    @Expose
-    var currency: Currency? = null,
+    val currency: Currency? = null,
 
-    @Expose
-    var timeline: Timeline? = null,
+    val timeline: Timeline? = null,
 
 ) : Account(), Parcelable

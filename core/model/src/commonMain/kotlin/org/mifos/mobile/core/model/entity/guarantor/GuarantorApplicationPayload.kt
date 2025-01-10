@@ -18,14 +18,14 @@ import kotlinx.serialization.SerialName
 data class GuarantorApplicationPayload(
 
     @SerialName("guarantorTypeId")
-    var guarantorTypeId: Long?,
+    val guarantorTypeId: Long?,
 
     @SerialName("firstname")
-    var firstName: String?,
+    val firstName: String?,
 
     @SerialName("lastname")
-    var lastName: String?,
+    val lastName: String?,
 
     @SerialName("city")
-    var city: String? = "",
+    val city: String? = "",
 )

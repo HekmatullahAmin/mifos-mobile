@@ -9,30 +9,30 @@
  */
 package org.mifos.mobile.core.model.entity.templates.loans
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
 /**
  * Created by Rajan Maurya on 16/07/16.
  */
 
-@MyParcelize
+@Parcelize
 data class AllowAttributeOverrides(
 
-    var amortizationType: Boolean? = null,
+    val amortizationType: Boolean? = null,
 
-    var interestType: Boolean? = null,
+    val interestType: Boolean? = null,
 
-    var transactionProcessingStrategyId: Boolean? = null,
+    val transactionProcessingStrategyId: Boolean? = null,
 
-    var interestCalculationPeriodType: Boolean? = null,
+    val interestCalculationPeriodType: Boolean? = null,
 
-    var inArrearsTolerance: Boolean? = null,
+    val inArrearsTolerance: Boolean? = null,
 
-    var repaymentEvery: Boolean? = null,
+    val repaymentEvery: Boolean? = null,
 
-    var graceOnPrincipalAndInterestPayment: Boolean? = null,
+    val graceOnPrincipalAndInterestPayment: Boolean? = null,
 
-    var graceOnArrearsAgeing: Boolean? = null,
+    val graceOnArrearsAgeing: Boolean? = null,
 
 ) : Parcelable

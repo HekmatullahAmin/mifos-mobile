@@ -9,14 +9,14 @@
  */
 package org.mifos.mobile.core.model.entity.accounts.loan
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
-@MyParcelize
+@Parcelize
 data class RecalculationRestFrequencyType(
-    var id: Int? = null,
+    val id: Int? = null,
 
-    var code: String? = null,
+    val code: String? = null,
 
-    var value: String? = null,
+    val value: String? = null,
 ) : Parcelable

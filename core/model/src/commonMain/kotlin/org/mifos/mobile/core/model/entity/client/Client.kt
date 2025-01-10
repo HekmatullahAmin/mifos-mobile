@@ -9,57 +9,57 @@
  */
 package org.mifos.mobile.core.model.entity.client
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 import org.mifos.mobile.core.model.entity.Timeline
 
-@MyParcelize
+@Parcelize
 data class Client(
-    var id: Int = 0,
+    val id: Int = 0,
 
-    var accountNo: String? = null,
+    val accountNo: String? = null,
 
-    private var status: Status? = null,
+    private val status: Status? = null,
 
-    private var active: Boolean? = null,
+    private val active: Boolean? = null,
 
-    var activationDate: List<Int> = ArrayList(),
+    val activationDate: List<Int> = ArrayList(),
 
-    var dobDate: List<Int> = ArrayList(),
+    val dobDate: List<Int> = ArrayList(),
 
-    var firstname: String? = null,
+    val firstname: String? = null,
 
-    var middlename: String? = null,
+    val middlename: String? = null,
 
-    var lastname: String? = null,
+    val lastname: String? = null,
 
-    var displayName: String? = null,
+    val displayName: String? = null,
 
-    var fullname: String? = null,
+    val fullname: String? = null,
 
-    private var officeId: Int? = null,
+    private val officeId: Int? = null,
 
-    var officeName: String? = null,
+    val officeName: String? = null,
 
-    private var staffId: Int? = null,
+    private val staffId: Int? = null,
 
-    private var staffName: String? = null,
+    private val staffName: String? = null,
 
-    private var timeline: Timeline? = null,
+    private val timeline: Timeline? = null,
 
-    var imageId: Int = 0,
+    val imageId: Int = 0,
 
-    var isImagePresent: Boolean = false,
+    val isImagePresent: Boolean = false,
 
-    private var externalId: String? = null,
+    private val externalId: String? = null,
 
-    var mobileNo: String? = null,
+    val mobileNo: String? = null,
 
-    var clientClassification: ClientClassification? = null,
+    val clientClassification: ClientClassification? = null,
 
-    var clientType: ClientType? = null,
+    val clientType: ClientType? = null,
 
-    var gender: Gender? = null,
+    val gender: Gender? = null,
 
-    var groups: List<Group> = ArrayList(),
+    val groups: List<Group> = ArrayList(),
 ) : Parcelable

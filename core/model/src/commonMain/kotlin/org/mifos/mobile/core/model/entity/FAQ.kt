@@ -9,17 +9,16 @@
  */
 package org.mifos.mobile.core.model.entity
 
-import org.mifos.mobile.core.model.MyParcelize
-import org.mifos.mobile.core.model.OverloadSupport
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
 /**
  * Created by dilpreet on 12/8/17.
  */
 
-@MyParcelize
-data class FAQ @OverloadSupport constructor(
-    var question: String? = null,
-    var answer: String? = null,
-    var isSelected: Boolean = false,
+@Parcelize
+data class FAQ constructor(
+    val question: String? = null,
+    val answer: String? = null,
+    val isSelected: Boolean = false,
 ) : Parcelable

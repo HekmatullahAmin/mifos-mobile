@@ -9,16 +9,16 @@
  */
 package org.mifos.mobile.core.model.entity.templates.loans
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
 /**
  * Created by Rajan Maurya on 16/07/16.
  */
 
-@MyParcelize
+@Parcelize
 data class TaxGroup(
-    var id: Int? = null,
+    val id: Int? = null,
 
-    var name: String? = null,
+    val name: String? = null,
 ) : Parcelable

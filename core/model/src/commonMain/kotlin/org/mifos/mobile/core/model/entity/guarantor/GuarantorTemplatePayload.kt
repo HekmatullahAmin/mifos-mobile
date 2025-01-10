@@ -15,6 +15,6 @@ package org.mifos.mobile.core.model.entity.guarantor
 
 data class GuarantorTemplatePayload(
 
-    var guarantorType: GuarantorType? = null,
-    var guarantorTypeOptions: ArrayList<GuarantorType>? = null,
+    val guarantorType: GuarantorType? = null,
+    val guarantorTypeOptions: ArrayList<GuarantorType>? = null,
 )

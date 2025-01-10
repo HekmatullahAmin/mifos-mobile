@@ -9,8 +9,8 @@
  */
 package org.mifos.mobile.core.model.entity
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
 /**
  * Created by ishankhanna for mifos android-client on 09/02/14.
@@ -22,18 +22,18 @@ import org.mifos.mobile.core.model.Parcelable
  * See https://github.com/openMF/android-client/blob/master/LICENSE.md
  */
 
-@MyParcelize
+@Parcelize
 data class Timeline(
-    var submittedOnDate: List<Int> = ArrayList(),
-    var submittedByUsername: String? = null,
-    var submittedByFirstname: String? = null,
-    var submittedByLastname: String? = null,
-    var activatedOnDate: List<Int> = ArrayList(),
-    var activatedByUsername: String? = null,
-    var activatedByFirstname: String? = null,
-    var activatedByLastname: String? = null,
-    var closedOnDate: List<Int> = ArrayList(),
-    var closedByUsername: String? = null,
-    var closedByFirstname: String? = null,
-    var closedByLastname: String? = null,
+    val submittedOnDate: List<Int> = ArrayList(),
+    val submittedByUsername: String? = null,
+    val submittedByFirstname: String? = null,
+    val submittedByLastname: String? = null,
+    val activatedOnDate: List<Int> = ArrayList(),
+    val activatedByUsername: String? = null,
+    val activatedByFirstname: String? = null,
+    val activatedByLastname: String? = null,
+    val closedOnDate: List<Int> = ArrayList(),
+    val closedByUsername: String? = null,
+    val closedByFirstname: String? = null,
+    val closedByLastname: String? = null,
 ) : Parcelable

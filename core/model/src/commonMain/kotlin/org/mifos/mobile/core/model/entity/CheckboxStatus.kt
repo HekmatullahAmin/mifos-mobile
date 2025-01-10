@@ -9,14 +9,12 @@
  */
 package org.mifos.mobile.core.model.entity
 
-import org.mifos.mobile.core.model.OverloadSupport
-
 /**
  * Created by dilpreet on 3/7/17.
  */
 
-data class CheckboxStatus @OverloadSupport constructor(
-    var status: String?,
-    var color: Int,
-    var isChecked: Boolean = false,
+data class CheckboxStatus constructor(
+    val status: String?,
+    val color: Int,
+    val isChecked: Boolean = false,
 )

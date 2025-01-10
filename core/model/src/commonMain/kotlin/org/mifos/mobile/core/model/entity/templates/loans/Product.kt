@@ -10,8 +10,8 @@
 package org.mifos.mobile.core.model.entity.templates.loans
 
 import kotlinx.serialization.SerialName
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 import org.mifos.mobile.core.model.entity.accounts.loan.AmortizationType
 import org.mifos.mobile.core.model.entity.accounts.loan.DaysInMonthType
 import org.mifos.mobile.core.model.entity.accounts.loan.DaysInYearType
@@ -25,106 +25,106 @@ import org.mifos.mobile.core.model.entity.accounts.loan.RepaymentFrequencyType
  * Created by Rajan Maurya on 16/07/16.
  */
 
-@MyParcelize
+@Parcelize
 data class Product(
 
-    var id: Int? = null,
+    val id: Int? = null,
 
-    var name: String? = null,
+    val name: String? = null,
 
-    var shortName: String? = null,
+    val shortName: String? = null,
 
-    var fundId: Int? = null,
+    val fundId: Int? = null,
 
-    var fundName: String? = null,
+    val fundName: String? = null,
 
-    var includeInBorrowerCycle: Boolean? = null,
+    val includeInBorrowerCycle: Boolean? = null,
 
-    var useBorrowerCycle: Boolean? = null,
+    val useBorrowerCycle: Boolean? = null,
 
-    var startDate: List<Int>? = null,
+    val startDate: List<Int>? = null,
 
-    var status: String? = null,
+    val status: String? = null,
 
-    var currency: Currency? = null,
+    val currency: Currency? = null,
 
-    var principal: Double? = null,
+    val principal: Double? = null,
 
-    var minPrincipal: Double? = null,
+    val minPrincipal: Double? = null,
 
-    var maxPrincipal: Double? = null,
+    val maxPrincipal: Double? = null,
 
-    var numberOfRepayments: Int? = null,
+    val numberOfRepayments: Int? = null,
 
-    var minNumberOfRepayments: Int? = null,
+    val minNumberOfRepayments: Int? = null,
 
-    var maxNumberOfRepayments: Int? = null,
+    val maxNumberOfRepayments: Int? = null,
 
-    var repaymentEvery: Int? = null,
+    val repaymentEvery: Int? = null,
 
-    var repaymentFrequencyType: RepaymentFrequencyType? = null,
+    val repaymentFrequencyType: RepaymentFrequencyType? = null,
 
-    var interestRatePerPeriod: Double? = null,
+    val interestRatePerPeriod: Double? = null,
 
-    var minInterestRatePerPeriod: Double? = null,
+    val minInterestRatePerPeriod: Double? = null,
 
-    var maxInterestRatePerPeriod: Double? = null,
+    val maxInterestRatePerPeriod: Double? = null,
 
-    var interestRateFrequencyType: InterestRateFrequencyType? = null,
+    val interestRateFrequencyType: InterestRateFrequencyType? = null,
 
-    var annualInterestRate: Double? = null,
+    val annualInterestRate: Double? = null,
 
     @SerialName("isLinkedToFloatingInterestRates")
-    var linkedToFloatingInterestRates: Boolean? = null,
+    val linkedToFloatingInterestRates: Boolean? = null,
 
     @SerialName("isFloatingInterestRateCalculationAllowed")
-    var floatingInterestRateCalculationAllowed: Boolean? = null,
+    val floatingInterestRateCalculationAllowed: Boolean? = null,
 
-    var allowVariableInstallments: Boolean? = null,
+    val allowvaliableInstallments: Boolean? = null,
 
-    var minimumGap: Double? = null,
+    val minimumGap: Double? = null,
 
-    var maximumGap: Double? = null,
+    val maximumGap: Double? = null,
 
-    var amortizationType: AmortizationType,
+    val amortizationType: AmortizationType,
 
-    var interestType: InterestType,
+    val interestType: InterestType,
 
-    var interestCalculationPeriodType: InterestCalculationPeriodType? = null,
+    val interestCalculationPeriodType: InterestCalculationPeriodType? = null,
 
-    var allowPartialPeriodInterestCalcualtion: Boolean? = null,
+    val allowPartialPeriodInterestCalcualtion: Boolean? = null,
 
-    var transactionProcessingStrategyId: Int? = null,
+    val transactionProcessingStrategyId: Int? = null,
 
-    var transactionProcessingStrategyName: String? = null,
+    val transactionProcessingStrategyName: String? = null,
 
-    var graceOnArrearsAgeing: Int? = null,
+    val graceOnArrearsAgeing: Int? = null,
 
-    var overdueDaysForNPA: Int? = null,
+    val overdueDaysForNPA: Int? = null,
 
-    var daysInMonthType: DaysInMonthType? = null,
+    val daysInMonthType: DaysInMonthType? = null,
 
-    var daysInYearType: DaysInYearType,
+    val daysInYearType: DaysInYearType,
 
     @SerialName("isInterestRecalculationEnabled")
-    var interestRecalculationEnabled: Boolean? = null,
+    val interestRecalculationEnabled: Boolean? = null,
 
-    var interestRecalculationData: InterestRecalculationData? = null,
+    val interestRecalculationData: InterestRecalculationData? = null,
 
-    var canDefineInstallmentAmount: Boolean? = null,
+    val canDefineInstallmentAmount: Boolean? = null,
 
-    var accountingRule: AccountingRule? = null,
+    val accountingRule: AccountingRule? = null,
 
-    var multiDisburseLoan: Boolean? = null,
+    val multiDisburseLoan: Boolean? = null,
 
-    var maxTrancheCount: Int? = null,
+    val maxTrancheCount: Int? = null,
 
-    var principalThresholdForLastInstallment: Int? = null,
+    val principalThresholdForLastInstallment: Int? = null,
 
-    var holdGuaranteeFunds: Boolean? = null,
+    val holdGuaranteeFunds: Boolean? = null,
 
-    var accountMovesOutOfNPAOnlyOnArrearsCompletion: Boolean? = null,
+    val accountMovesOutOfNPAOnlyOnArrearsCompletion: Boolean? = null,
 
-    var allowAttributeOverrides: AllowAttributeOverrides? = null,
+    val allowAttributeOverrides: AllowAttributeOverrides? = null,
 
 ) : Parcelable

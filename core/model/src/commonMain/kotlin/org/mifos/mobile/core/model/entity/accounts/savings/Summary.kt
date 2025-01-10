@@ -9,28 +9,28 @@
  */
 package org.mifos.mobile.core.model.entity.accounts.savings
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
-@MyParcelize
+@Parcelize
 data class Summary(
 
-    var currency: Currency? = null,
+    val currency: Currency? = null,
 
-    var totalDeposits: Double? = null,
+    val totalDeposits: Double? = null,
 
-    var totalWithdrawals: Double? = null,
+    val totalWithdrawals: Double? = null,
 
-    var totalInterestEarned: Double? = null,
+    val totalInterestEarned: Double? = null,
 
-    var totalInterestPosted: Double? = null,
+    val totalInterestPosted: Double? = null,
 
-    var accountBalance: Double? = null,
+    val accountBalance: Double? = null,
 
-    var totalOverdraftInterestDerived: Double? = null,
+    val totalOverdraftInterestDerived: Double? = null,
 
-    var interestNotPosted: Double? = null,
+    val interestNotPosted: Double? = null,
 
-    var lastInterestCalculationDate: List<Int> = ArrayList(),
+    val lastInterestCalculationDate: List<Int> = ArrayList(),
 
 ) : Parcelable

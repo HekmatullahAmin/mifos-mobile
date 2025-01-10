@@ -9,27 +9,27 @@
  */
 package org.mifos.mobile.core.model.entity.templates.account
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
 /**
  * Created by Rajan Maurya on 10/03/17.
  */
 
-@MyParcelize
+@Parcelize
 data class AccountOption(
-    var accountId: Int? = null,
+    val accountId: Int? = null,
 
-    var accountNo: String? = null,
+    val accountNo: String? = null,
 
-    var accountType: AccountType? = null,
+    val accountType: AccountType? = null,
 
-    var clientId: Long? = null,
+    val clientId: Long? = null,
 
-    var clientName: String? = null,
+    val clientName: String? = null,
 
-    var officeId: Int? = null,
+    val officeId: Int? = null,
 
-    var officeName: String? = null,
+    val officeName: String? = null,
 
 ) : Parcelable

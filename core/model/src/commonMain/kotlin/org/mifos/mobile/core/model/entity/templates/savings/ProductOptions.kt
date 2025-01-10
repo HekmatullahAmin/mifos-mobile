@@ -9,15 +9,15 @@
  */
 package org.mifos.mobile.core.model.entity.templates.savings
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
 /*
  * Created by saksham on 01/July/2018
  */
 
-@MyParcelize
+@Parcelize
 data class ProductOptions(
-    var id: Int? = null,
-    var name: String? = null,
+    val id: Int? = null,
+    val name: String? = null,
 ) : Parcelable

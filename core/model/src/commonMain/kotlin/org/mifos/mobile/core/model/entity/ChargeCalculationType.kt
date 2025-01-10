@@ -10,13 +10,13 @@
 package org.mifos.mobile.core.model.entity
 
 import kotlinx.serialization.Serializable
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
-@MyParcelize
+@Parcelize
 @Serializable
 data class ChargeCalculationType(
-    var id: Int = 0,
-    var code: String? = null,
-    var value: String? = null,
+    val id: Int = 0,
+    val code: String? = null,
+    val value: String? = null,
 ) : Parcelable

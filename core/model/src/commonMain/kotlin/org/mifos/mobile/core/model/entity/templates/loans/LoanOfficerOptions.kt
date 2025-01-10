@@ -10,36 +10,36 @@
 package org.mifos.mobile.core.model.entity.templates.loans
 
 import kotlinx.serialization.SerialName
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
 /**
  * Created by Rajan Maurya on 16/07/16.
  */
 
-@MyParcelize
+@Parcelize
 data class LoanOfficerOptions(
 
-    var id: Int? = null,
+    val id: Int? = null,
 
-    var firstname: String? = null,
+    val firstname: String? = null,
 
-    var lastname: String? = null,
+    val lastname: String? = null,
 
-    var displayName: String? = null,
+    val displayName: String? = null,
 
-    var mobileNo: String? = null,
+    val mobileNo: String? = null,
 
-    var officeId: Int? = null,
+    val officeId: Int? = null,
 
-    var officeName: String? = null,
+    val officeName: String? = null,
 
     @SerialName("isLoanOfficer")
-    var loanOfficer: Boolean? = null,
+    val loanOfficer: Boolean? = null,
 
     @SerialName("isActive")
-    var active: Boolean? = null,
+    val active: Boolean? = null,
 
-    var joiningDate: List<Int>? = null,
+    val joiningDate: List<Int>? = null,
 
 ) : Parcelable

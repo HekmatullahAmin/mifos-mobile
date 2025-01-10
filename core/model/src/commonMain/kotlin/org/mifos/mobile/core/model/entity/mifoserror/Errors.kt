@@ -9,13 +9,13 @@
  */
 package org.mifos.mobile.core.model.entity.mifoserror
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
-@MyParcelize
+@Parcelize
 data class Errors(
-    var developerMessage: String? = null,
-    var defaultUserMessage: String? = null,
-    var userMessageGlobalisationCode: String? = null,
-    var parameterName: String? = null,
+    val developerMessage: String? = null,
+    val defaultUserMessage: String? = null,
+    val userMessageGlobalisationCode: String? = null,
+    val parameterName: String? = null,
 ) : Parcelable

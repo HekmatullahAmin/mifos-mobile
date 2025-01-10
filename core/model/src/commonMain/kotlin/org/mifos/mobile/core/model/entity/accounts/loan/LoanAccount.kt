@@ -9,52 +9,52 @@
  */
 package org.mifos.mobile.core.model.entity.accounts.loan
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 import org.mifos.mobile.core.model.entity.accounts.Account
 
-@MyParcelize
+@Parcelize
 data class LoanAccount(
-    var loanProductId: Long = 0,
+    val loanProductId: Long = 0,
 
-    var externalId: String? = null,
+    val externalId: String? = null,
 
-    var numberOfRepayments: Long = 0,
+    val numberOfRepayments: Long = 0,
 
-    var accountNo: String? = null,
+    val accountNo: String? = null,
 
-    var productName: String? = null,
+    val productName: String? = null,
 
-    var productId: Int? = null,
+    val productId: Int? = null,
 
-    var loanProductName: String? = null,
+    val loanProductName: String? = null,
 
-    var clientName: String? = null,
+    val clientName: String? = null,
 
-    var loanProductDescription: String? = null,
+    val loanProductDescription: String? = null,
 
-    var principal: Double = 0.toDouble(),
+    val principal: Double = 0.toDouble(),
 
-    var annualInterestRate: Double = 0.toDouble(),
+    val annualInterestRate: Double = 0.toDouble(),
 
-    var status: Status? = null,
+    val status: Status? = null,
 
-    var loanType: LoanType? = null,
+    val loanType: LoanType? = null,
 
-    var loanCycle: Int? = null,
+    val loanCycle: Int? = null,
 
-    var loanBalance: Double = 0.toDouble(),
+    val loanBalance: Double = 0.toDouble(),
 
-    var amountPaid: Double = 0.toDouble(),
+    val amountPaid: Double = 0.toDouble(),
 
-    var currency: Currency?,
+    val currency: Currency?,
 
-    var inArrears: Boolean? = null,
+    val inArrears: Boolean? = null,
 
-    var summary: Summary? = null,
+    val summary: Summary? = null,
 
-    var loanPurposeName: String? = null,
+    val loanPurposeName: String? = null,
 
-    var timeline: Timeline?,
+    val timeline: Timeline?,
 
 ) : Account(), Parcelable

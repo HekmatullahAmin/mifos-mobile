@@ -9,61 +9,61 @@
  */
 package org.mifos.mobile.core.model.entity.payload
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
 /**
  * Created by nellyk on 2/20/2016.
  */
 
-@MyParcelize
+@Parcelize
 data class LoansPayload(
 
-    var clientId: Int? = null,
+    val clientId: Int? = null,
 
-    var productId: Int? = null,
+    val productId: Int? = null,
 
-    var productName: String? = null,
+    val productName: String? = null,
 
-    var principal: Double? = null,
+    val principal: Double? = null,
 
-    var loanTermFrequency: Int? = null,
+    val loanTermFrequency: Int? = null,
 
-    var loanTermFrequencyType: Int? = null,
+    val loanTermFrequencyType: Int? = null,
 
-    var loanType: String? = null,
+    val loanType: String? = null,
 
-    var numberOfRepayments: Int? = null,
+    val numberOfRepayments: Int? = null,
 
-    var repaymentEvery: Int? = null,
+    val repaymentEvery: Int? = null,
 
-    var repaymentFrequencyType: Int? = null,
+    val repaymentFrequencyType: Int? = null,
 
-    var interestRatePerPeriod: Double? = null,
+    val interestRatePerPeriod: Double? = null,
 
-    var amortizationType: Int? = null,
+    val amortizationType: Int? = null,
 
-    var interestType: Int? = null,
+    val interestType: Int? = null,
 
-    var interestCalculationPeriodType: Int? = null,
+    val interestCalculationPeriodType: Int? = null,
 
-    var transactionProcessingStrategyId: Int? = null,
+    val transactionProcessingStrategyId: Int? = null,
 
-    var expectedDisbursementDate: String? = null,
+    val expectedDisbursementDate: String? = null,
 
-    var submittedOnDate: String? = null,
+    val submittedOnDate: String? = null,
 
-    var linkAccountId: Int? = null,
+    val linkAccountId: Int? = null,
 
-    var loanPurposeId: Int? = null,
+    val loanPurposeId: Int? = null,
 
-    var loanPurpose: String? = null,
+    val loanPurpose: String? = null,
 
-    var maxOutstandingLoanBalance: Double? = null,
+    val maxOutstandingLoanBalance: Double? = null,
 
-    var currency: String? = null,
+    val currency: String? = null,
 
-    var dateFormat: String = "dd MMMM yyyy",
+    val dateFormat: String = "dd MMMM yyyy",
 
-    var locale: String = "en",
+    val locale: String = "en",
 ) : Parcelable

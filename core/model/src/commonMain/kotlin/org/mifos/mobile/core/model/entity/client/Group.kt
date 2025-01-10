@@ -9,12 +9,12 @@
  */
 package org.mifos.mobile.core.model.entity.client
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
-@MyParcelize
+@Parcelize
 data class Group(
-    var id: Int,
-    var accountNo: String? = null,
-    var name: String? = null,
+    val id: Int,
+    val accountNo: String? = null,
+    val name: String? = null,
 ) : Parcelable

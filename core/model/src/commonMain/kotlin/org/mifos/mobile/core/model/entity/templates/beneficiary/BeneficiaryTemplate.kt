@@ -9,14 +9,14 @@
  */
 package org.mifos.mobile.core.model.entity.templates.beneficiary
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
 /**
  * Created by dilpreet on 14/6/17.
  */
 
-@MyParcelize
+@Parcelize
 data class BeneficiaryTemplate(
-    var accountTypeOptions: List<AccountTypeOption>? = null,
+    val accountTypeOptions: List<AccountTypeOption>? = null,
 ) : Parcelable

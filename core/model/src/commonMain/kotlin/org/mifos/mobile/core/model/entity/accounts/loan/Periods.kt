@@ -9,89 +9,89 @@
  */
 package org.mifos.mobile.core.model.entity.accounts.loan
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
-@MyParcelize
+@Parcelize
 data class Periods(
-    var period: Int? = null,
+    val period: Int? = null,
 
-    var fromDate: List<Int> = ArrayList(),
+    val fromDate: List<Int> = ArrayList(),
 
-    var dueDate: List<Int> = ArrayList(),
+    val dueDate: List<Int> = ArrayList(),
 
-    var obligationsMetOnDate: List<Int> = ArrayList(),
+    val obligationsMetOnDate: List<Int> = ArrayList(),
 
-    var principalDisbursed: Double? = null,
+    val principalDisbursed: Double? = null,
 
-    var complete: Boolean? = null,
+    val complete: Boolean? = null,
 
-    var daysInPeriod: Int? = null,
+    val daysInPeriod: Int? = null,
 
-    var principalOriginalDue: Double? = null,
+    val principalOriginalDue: Double? = null,
 
-    var principalDue: Double? = null,
+    val principalDue: Double? = null,
 
-    var principalPaid: Double? = null,
+    val principalPaid: Double? = null,
 
-    var principalWrittenOff: Double? = null,
+    val principalWrittenOff: Double? = null,
 
-    var principalOutstanding: Double? = null,
+    val principalOutstanding: Double? = null,
 
-    var principalLoanBalanceOutstanding: Double? = null,
+    val principalLoanBalanceOutstanding: Double? = null,
 
-    var interestOriginalDue: Double? = null,
+    val interestOriginalDue: Double? = null,
 
-    var interestDue: Double? = null,
+    val interestDue: Double? = null,
 
-    var interestPaid: Double? = null,
+    val interestPaid: Double? = null,
 
-    var interestWaived: Double? = null,
+    val interestWaived: Double? = null,
 
-    var interestWrittenOff: Double? = null,
+    val interestWrittenOff: Double? = null,
 
-    var interestOutstanding: Double? = null,
+    val interestOutstanding: Double? = null,
 
-    var feeChargesDue: Double? = null,
+    val feeChargesDue: Double? = null,
 
-    var feeChargesPaid: Double? = null,
+    val feeChargesPaid: Double? = null,
 
-    var feeChargesWaived: Double? = null,
+    val feeChargesWaived: Double? = null,
 
-    var feeChargesWrittenOff: Double? = null,
+    val feeChargesWrittenOff: Double? = null,
 
-    var feeChargesOutstanding: Double? = null,
+    val feeChargesOutstanding: Double? = null,
 
-    var penaltyChargesDue: Double? = null,
+    val penaltyChargesDue: Double? = null,
 
-    var penaltyChargesPaid: Double? = null,
+    val penaltyChargesPaid: Double? = null,
 
-    var penaltyChargesWaived: Double? = null,
+    val penaltyChargesWaived: Double? = null,
 
-    var penaltyChargesWrittenOff: Double? = null,
+    val penaltyChargesWrittenOff: Double? = null,
 
-    var penaltyChargesOutstanding: Double? = null,
+    val penaltyChargesOutstanding: Double? = null,
 
-    var totalOriginalDueForPeriod: Double? = null,
+    val totalOriginalDueForPeriod: Double? = null,
 
-    var totalDueForPeriod: Double? = null,
+    val totalDueForPeriod: Double? = null,
 
-    var totalPaidForPeriod: Double? = null,
+    val totalPaidForPeriod: Double? = null,
 
-    var totalPaidInAdvanceForPeriod: Double? = null,
+    val totalPaidInAdvanceForPeriod: Double? = null,
 
-    var totalPaidLateForPeriod: Double? = null,
+    val totalPaidLateForPeriod: Double? = null,
 
-    var totalWaivedForPeriod: Double? = null,
+    val totalWaivedForPeriod: Double? = null,
 
-    var totalWrittenOffForPeriod: Double? = null,
+    val totalWrittenOffForPeriod: Double? = null,
 
-    var totalOutstandingForPeriod: Double? = null,
+    val totalOutstandingForPeriod: Double? = null,
 
-    var totalOverdue: Double? = null,
+    val totalOverdue: Double? = null,
 
-    var totalActualCostOfLoanForPeriod: Double? = null,
+    val totalActualCostOfLoanForPeriod: Double? = null,
 
-    var totalInstallmentAmountForPeriod: Double? = null,
+    val totalInstallmentAmountForPeriod: Double? = null,
 
 ) : Parcelable

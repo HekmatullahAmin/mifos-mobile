@@ -9,35 +9,35 @@
  */
 package org.mifos.mobile.core.model.entity.accounts.savings
 
-import org.mifos.mobile.core.model.MyParcelize
 import org.mifos.mobile.core.model.Parcelable
+import org.mifos.mobile.core.model.Parcelize
 
-@MyParcelize
+@Parcelize
 data class TimeLine(
-    var submittedOnDate: List<Int> = ArrayList(),
+    val submittedOnDate: List<Int> = ArrayList(),
 
-    var submittedByUsername: String?,
+    val submittedByUsername: String?,
 
-    var submittedByFirstname: String?,
+    val submittedByFirstname: String?,
 
-    var submittedByLastname: String?,
+    val submittedByLastname: String?,
 
-    var approvedOnDate: List<Int> = ArrayList(),
+    val approvedOnDate: List<Int> = ArrayList(),
 
-    var approvedByUsername: String?,
+    val approvedByUsername: String?,
 
-    var approvedByFirstname: String?,
+    val approvedByFirstname: String?,
 
-    var approvedByLastname: String?,
+    val approvedByLastname: String?,
 
-    var activatedOnDate: List<Int>? = null,
+    val activatedOnDate: List<Int>? = null,
 
-    var activatedByUsername: String?,
+    val activatedByUsername: String?,
 
-    var activatedByFirstname: String?,
+    val activatedByFirstname: String?,
 
-    var activatedByLastname: String?,
+    val activatedByLastname: String?,
 
-    var closedOnDate: List<Int>,
+    val closedOnDate: List<Int>,
 
 ) : Parcelable
