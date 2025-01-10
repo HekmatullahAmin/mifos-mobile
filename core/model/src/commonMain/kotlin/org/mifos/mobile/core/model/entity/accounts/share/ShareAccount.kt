@@ -11,11 +11,12 @@ package org.mifos.mobile.core.model.entity.accounts.share
 
 import org.mifos.mobile.core.model.Parcelable
 import org.mifos.mobile.core.model.Parcelize
-import org.mifos.mobile.core.model.entity.accounts.Account
 import org.mifos.mobile.core.model.entity.accounts.savings.Currency
 
 @Parcelize
 data class ShareAccount(
+
+    val id: Long = 0,
 
     val accountNo: String? = null,
 
@@ -35,4 +36,4 @@ data class ShareAccount(
 
     val timeline: Timeline? = null,
 
-) : Account(), Parcelable
+) : Parcelable

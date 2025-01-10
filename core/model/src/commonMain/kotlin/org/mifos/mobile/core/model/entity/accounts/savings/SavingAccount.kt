@@ -11,11 +11,12 @@ package org.mifos.mobile.core.model.entity.accounts.savings
 
 import org.mifos.mobile.core.model.Parcelable
 import org.mifos.mobile.core.model.Parcelize
-import org.mifos.mobile.core.model.entity.accounts.Account
 import org.mifos.mobile.core.model.entity.client.DepositType
 
 @Parcelize
 data class SavingAccount(
+
+    val id: Long = 0,
 
     val accountNo: String? = null,
 
@@ -48,7 +49,7 @@ data class SavingAccount(
     val lastActiveTransactionDate: List<Int>? = null,
 
     val timeLine: TimeLine? = null,
-) : Parcelable, Account() {
+) : Parcelable {
     fun isRecurring(): Boolean {
         return this.depositType != null && (this.depositType?.isRecurring() == true)
     }

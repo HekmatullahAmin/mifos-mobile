@@ -11,10 +11,11 @@ package org.mifos.mobile.core.model.entity.accounts.loan
 
 import org.mifos.mobile.core.model.Parcelable
 import org.mifos.mobile.core.model.Parcelize
-import org.mifos.mobile.core.model.entity.accounts.Account
 
 @Parcelize
 data class LoanAccount(
+    val id: Long = 0,
+
     val loanProductId: Long = 0,
 
     val externalId: String? = null,
@@ -56,5 +57,4 @@ data class LoanAccount(
     val loanPurposeName: String? = null,
 
     val timeline: Timeline?,
-
-) : Account(), Parcelable
+) : Parcelable
