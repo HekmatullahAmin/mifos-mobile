@@ -14,7 +14,7 @@ import org.mifos.mobile.core.model.Parcelize
 
 @Parcelize
 data class TimeLine(
-    val submittedOnDate: List<Int> = ArrayList(),
+    val submittedOnDate: List<Int> = emptyList(),
 
     val submittedByUsername: String?,
 
@@ -22,7 +22,7 @@ data class TimeLine(
 
     val submittedByLastname: String?,
 
-    val approvedOnDate: List<Int> = ArrayList(),
+    val approvedOnDate: List<Int> = emptyList(),
 
     val approvedByUsername: String?,
 
@@ -38,6 +38,6 @@ data class TimeLine(
 
     val activatedByLastname: String?,
 
-    val closedOnDate: List<Int>,
+    val closedOnDate: List<Int> = emptyList(),
 
 ) : Parcelable

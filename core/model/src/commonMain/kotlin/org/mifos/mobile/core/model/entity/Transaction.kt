@@ -29,13 +29,13 @@ data class Transaction(
 
     val type: Type,
 
-    val date: List<Int> = ArrayList(),
+    val date: List<Int> = emptyList(),
 
     val currency: Currency? = null,
 
     val amount: Double? = null,
 
-    val submittedOnDate: List<Int> = ArrayList(),
+    val submittedOnDate: List<Int> = emptyList(),
 
     val reversed: Boolean? = null,
 

@@ -12,5 +12,5 @@ package org.mifos.mobile.core.model.entity.accounts
 import org.mifos.mobile.core.model.entity.accounts.loan.LoanAccount
 
 data class LoanAccountsListResponse(
-    val loanAccounts: List<LoanAccount> = ArrayList(),
+    val loanAccounts: List<LoanAccount> = emptyList(),
 )

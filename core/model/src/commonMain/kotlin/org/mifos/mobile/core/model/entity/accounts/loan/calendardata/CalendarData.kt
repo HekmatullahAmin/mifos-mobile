@@ -24,9 +24,9 @@ data class CalendarData(
 
     val title: String? = null,
 
-    val startDate: List<Int> = ArrayList(),
+    val startDate: List<Int> = emptyList(),
 
-    val endDate: List<Int> = ArrayList(),
+    val endDate: List<Int> = emptyList(),
 
     val duration: Double? = null,
 
@@ -48,9 +48,9 @@ data class CalendarData(
 
     val humanReadable: String? = null,
 
-    val createdDate: List<Int> = ArrayList(),
+    val createdDate: List<Int> = emptyList(),
 
-    val lastUpdatedDate: List<Int> = ArrayList(),
+    val lastUpdatedDate: List<Int> = emptyList(),
 
     val createdByUserId: Int? = null,
 

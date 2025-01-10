@@ -31,6 +31,5 @@ data class Summary(
 
     val interestNotPosted: Double? = null,
 
-    val lastInterestCalculationDate: List<Int> = ArrayList(),
-
+    val lastInterestCalculationDate: List<Int> = emptyList(),
 ) : Parcelable

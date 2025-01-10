@@ -126,7 +126,7 @@ data class LoanWithAssociations(
 
     val maximumGap: Int? = null,
 
-    val transactions: MutableList<Transaction?>? = ArrayList(),
+    val transactions: MutableList<Transaction?>? = arrayListOf(),
 
     val loanPurposeName: String? = null,
 ) : Parcelable

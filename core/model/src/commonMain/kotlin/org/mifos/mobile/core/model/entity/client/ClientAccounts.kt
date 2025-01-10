@@ -17,10 +17,10 @@ import org.mifos.mobile.core.model.entity.accounts.share.ShareAccount
 
 @Parcelize
 data class ClientAccounts(
-    val loanAccounts: List<LoanAccount> = ArrayList(),
-    val savingsAccounts: List<SavingAccount>? = ArrayList(),
+    val loanAccounts: List<LoanAccount> = emptyList(),
+    val savingsAccounts: List<SavingAccount>? = emptyList(),
 
-    val shareAccounts: List<ShareAccount> = ArrayList(),
+    val shareAccounts: List<ShareAccount> = emptyList(),
 
 ) : Parcelable {
 
@@ -33,7 +33,7 @@ data class ClientAccounts(
     }
 
     private fun getSavingsAccounts(wantRecurring: Boolean): List<SavingAccount> {
-        val result = ArrayList<SavingAccount>()
+        val result = arrayListOf<SavingAccount>()
         if (this.savingsAccounts != null) {
             for (account in savingsAccounts!!) {
                 if (account.isRecurring() == wantRecurring) {

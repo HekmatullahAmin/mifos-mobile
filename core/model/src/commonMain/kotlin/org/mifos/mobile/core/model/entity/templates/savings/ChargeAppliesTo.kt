@@ -14,7 +14,7 @@ import org.mifos.mobile.core.model.Parcelize
 
 @Parcelize
 data class ChargeAppliesTo(
-    val id: Float = 0.toFloat(),
+    val id: Float = 0f,
     val code: String? = null,
     val value: String? = null,
 ) : Parcelable

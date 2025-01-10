@@ -34,9 +34,9 @@ data class LoanAccount(
 
     val loanProductDescription: String? = null,
 
-    val principal: Double = 0.toDouble(),
+    val principal: Double = 0.0,
 
-    val annualInterestRate: Double = 0.toDouble(),
+    val annualInterestRate: Double = 0.0,
 
     val status: Status? = null,
 
@@ -44,9 +44,9 @@ data class LoanAccount(
 
     val loanCycle: Int? = null,
 
-    val loanBalance: Double = 0.toDouble(),
+    val loanBalance: Double = 0.0,
 
-    val amountPaid: Double = 0.toDouble(),
+    val amountPaid: Double = 0.0,
 
     val currency: Currency?,
 

@@ -12,5 +12,5 @@ package org.mifos.mobile.core.model.entity.accounts
 import org.mifos.mobile.core.model.entity.accounts.savings.SavingAccount
 
 data class SavingAccountsListResponse(
-    val savingsAccounts: List<SavingAccount> = ArrayList(),
+    val savingsAccounts: List<SavingAccount> = emptyList(),
 )

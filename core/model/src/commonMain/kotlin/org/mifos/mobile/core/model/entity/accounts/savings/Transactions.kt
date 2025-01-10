@@ -22,7 +22,7 @@ data class Transactions(
 
     val accountNo: String? = null,
 
-    val date: List<Int> = ArrayList(),
+    val date: List<Int> = emptyList(),
 
     val currency: Currency? = null,
 

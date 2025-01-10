@@ -20,7 +20,7 @@ data class ChargeOptions(
     val active: Boolean? = null,
     val penalty: Boolean? = null,
     val currency: Currency? = null,
-    val amount: Float = 0.toFloat(),
+    val amount: Float = 0f,
     val chargeTimeType: ChargeTimeType,
     val chargeAppliesTo: ChargeAppliesTo,
     val chargeCalculationType: ChargeCalculationType,

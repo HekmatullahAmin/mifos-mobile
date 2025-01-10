@@ -13,7 +13,7 @@ package org.mifos.mobile.core.model.entity
  * Created by dilpreet on 3/7/17.
  */
 
-data class CheckboxStatus constructor(
+data class CheckboxStatus(
     val status: String?,
     val color: Int,
     val isChecked: Boolean = false,

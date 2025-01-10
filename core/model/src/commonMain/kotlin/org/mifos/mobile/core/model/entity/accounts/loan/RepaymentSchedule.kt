@@ -44,6 +44,5 @@ data class RepaymentSchedule(
 
     val totalOutstanding: Double? = null,
 
-    val periods: List<Periods> = ArrayList(),
-
+    val periods: List<Periods> = emptyList(),
 ) : Parcelable

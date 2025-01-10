@@ -23,9 +23,9 @@ data class Client(
 
     private val active: Boolean? = null,
 
-    val activationDate: List<Int> = ArrayList(),
+    val activationDate: List<Int> = emptyList(),
 
-    val dobDate: List<Int> = ArrayList(),
+    val dobDate: List<Int> = emptyList(),
 
     val firstname: String? = null,
 
@@ -61,5 +61,5 @@ data class Client(
 
     val gender: Gender? = null,
 
-    val groups: List<Group> = ArrayList(),
+    val groups: List<Group> = emptyList(),
 ) : Parcelable

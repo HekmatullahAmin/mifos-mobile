@@ -14,29 +14,29 @@ import org.mifos.mobile.core.model.Parcelize
 
 @Parcelize
 data class Summary(
-    val principalDisbursed: Double = 0.toDouble(),
+    val principalDisbursed: Double = 0.0,
 
-    val principalPaid: Double = 0.toDouble(),
+    val principalPaid: Double = 0.0,
 
-    val interestCharged: Double = 0.toDouble(),
+    val interestCharged: Double = 0.0,
 
-    val interestPaid: Double = 0.toDouble(),
+    val interestPaid: Double = 0.0,
 
-    val feeChargesCharged: Double = 0.toDouble(),
+    val feeChargesCharged: Double = 0.0,
 
-    val penaltyChargesCharged: Double = 0.toDouble(),
+    val penaltyChargesCharged: Double = 0.0,
 
-    val penaltyChargesWaived: Double = 0.toDouble(),
+    val penaltyChargesWaived: Double = 0.0,
 
-    val totalExpectedRepayment: Double = 0.toDouble(),
+    val totalExpectedRepayment: Double = 0.0,
 
-    val interestWaived: Double = 0.toDouble(),
+    val interestWaived: Double = 0.0,
 
-    val totalRepayment: Double = 0.toDouble(),
+    val totalRepayment: Double = 0.0,
 
-    val feeChargesWaived: Double = 0.toDouble(),
+    val feeChargesWaived: Double = 0.0,
 
-    val totalOutstanding: Double = 0.toDouble(),
+    val totalOutstanding: Double = 0.0,
 
     private val overdueSinceDate: List<Int>? = null,
 
@@ -44,10 +44,6 @@ data class Summary(
 ) : Parcelable {
 
     fun getOverdueSinceDate(): List<Int>? {
-        return if (overdueSinceDate == null) {
-            null
-        } else {
-            overdueSinceDate
-        }
+        return overdueSinceDate
     }
 }

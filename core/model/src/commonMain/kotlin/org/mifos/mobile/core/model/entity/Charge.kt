@@ -17,7 +17,7 @@ data class Charge(
     val clientId: Int? = null,
     val chargeId: Int? = null,
     val name: String? = null,
-    val dueDate: ArrayList<Int?> = ArrayList(),
+    val dueDate: ArrayList<Int?> = arrayListOf(),
     val chargeTimeType: ChargeTimeType? = null,
     val chargeCalculationType: ChargeCalculationType? = null,
     val currency: Currency? = null,

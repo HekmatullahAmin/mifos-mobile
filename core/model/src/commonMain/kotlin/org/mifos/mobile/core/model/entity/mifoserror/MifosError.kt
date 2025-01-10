@@ -18,5 +18,5 @@ data class MifosError(
     val httpStatusCode: String? = null,
     val defaultUserMessage: String? = null,
     val userMessageGlobalisationCode: String? = null,
-    val errors: List<Errors> = ArrayList(),
+    val errors: List<Errors> = emptyList(),
 ) : Parcelable

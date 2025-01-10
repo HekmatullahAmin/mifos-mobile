@@ -28,9 +28,9 @@ data class SavingAccount(
 
     val minRequiredBalance: Long = 0,
 
-    val accountBalance: Double = 0.toDouble(),
+    val accountBalance: Double = 0.0,
 
-    val totalDeposits: Double = 0.toDouble(),
+    val totalDeposits: Double = 0.0,
 
     val savingsProductName: String? = null,
 
@@ -38,7 +38,7 @@ data class SavingAccount(
 
     val savingsProductId: String? = null,
 
-    val nominalAnnualInterestRate: Double = 0.toDouble(),
+    val nominalAnnualInterestRate: Double = 0.0,
 
     val status: Status? = null,
 
@@ -51,6 +51,6 @@ data class SavingAccount(
     val timeLine: TimeLine? = null,
 ) : Parcelable {
     fun isRecurring(): Boolean {
-        return this.depositType != null && (this.depositType?.isRecurring() == true)
+        return this.depositType != null && this.depositType.isRecurring()
     }
 }

@@ -19,11 +19,11 @@ import org.mifos.mobile.core.model.Parcelize
 @Parcelize
 data class AccountOptionsTemplate(
 
-    val fromAccountOptions: List<AccountOption> = ArrayList(),
+    val fromAccountOptions: List<AccountOption> = emptyList(),
 
-    val toAccountOptions: List<AccountOption> = ArrayList(),
+    val toAccountOptions: List<AccountOption> = emptyList(),
 
-    val fromAccountTypeOptions: List<AccountType> = ArrayList(),
+    val fromAccountTypeOptions: List<AccountType> = emptyList(),
 
-    val toAccountTypeOptions: List<AccountType> = ArrayList(),
+    val toAccountTypeOptions: List<AccountType> = emptyList(),
 ) : Parcelable

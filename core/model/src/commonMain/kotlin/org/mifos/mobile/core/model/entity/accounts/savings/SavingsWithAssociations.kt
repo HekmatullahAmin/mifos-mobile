@@ -60,12 +60,12 @@ data class SavingsWithAssociations(
 
     val summary: Summary? = null,
 
-    val transactions: List<Transactions> = ArrayList(),
+    val transactions: List<Transactions> = emptyList(),
 
 ) : Parcelable {
 
     fun isRecurring(): Boolean {
-        return this.depositType != null && (this.depositType?.isRecurring() == true)
+        return this.depositType != null && this.depositType.isRecurring()
     }
 
     fun getNominalAnnualInterestRate(): Double {

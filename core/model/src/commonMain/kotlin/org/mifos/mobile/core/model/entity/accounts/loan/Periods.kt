@@ -16,11 +16,11 @@ import org.mifos.mobile.core.model.Parcelize
 data class Periods(
     val period: Int? = null,
 
-    val fromDate: List<Int> = ArrayList(),
+    val fromDate: List<Int> = emptyList(),
 
-    val dueDate: List<Int> = ArrayList(),
+    val dueDate: List<Int> = emptyList(),
 
-    val obligationsMetOnDate: List<Int> = ArrayList(),
+    val obligationsMetOnDate: List<Int> = emptyList(),
 
     val principalDisbursed: Double? = null,
 

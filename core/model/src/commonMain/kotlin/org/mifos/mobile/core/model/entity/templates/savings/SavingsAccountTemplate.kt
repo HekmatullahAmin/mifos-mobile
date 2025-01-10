@@ -25,6 +25,6 @@ data class SavingsAccountTemplate(
     val enforceMinRequiredBalance: Boolean? = null,
     val withHoldTax: Boolean? = null,
     val isDormancyTrackingActive: Boolean? = null,
-    val productOptions: ArrayList<ProductOptions> = ArrayList<ProductOptions>(),
-    val chargeOptions: ArrayList<ChargeOptions> = ArrayList<ChargeOptions>(),
+    val productOptions: ArrayList<ProductOptions> = arrayListOf(),
+    val chargeOptions: ArrayList<ChargeOptions> = arrayListOf(),
 ) : Parcelable

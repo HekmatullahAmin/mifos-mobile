@@ -15,5 +15,5 @@ package org.mifos.mobile.core.model.entity
 data class Page<T>(
 
     val totalFilteredRecords: Int = 0,
-    val pageItems: List<T> = ArrayList(),
+    val pageItems: List<T> = emptyList(),
 )
