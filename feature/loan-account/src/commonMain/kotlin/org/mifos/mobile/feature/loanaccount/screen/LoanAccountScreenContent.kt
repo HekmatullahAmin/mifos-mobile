@@ -18,31 +18,32 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import mifos_mobile.feature.loan_account.generated.resources.Res
-import mifos_mobile.feature.loan_account.generated.resources.feature_account_approved
+import mifos_mobile.feature.loan_account.generated.resources.feature_account_active
+import mifos_mobile.feature.loan_account.generated.resources.feature_account_approval_pending
 import mifos_mobile.feature.loan_account.generated.resources.feature_account_closed
-import mifos_mobile.feature.loan_account.generated.resources.feature_account_disbursement
-import mifos_mobile.feature.loan_account.generated.resources.feature_account_submitted
+import mifos_mobile.feature.loan_account.generated.resources.feature_account_disburse
+import mifos_mobile.feature.loan_account.generated.resources.feature_account_in_arrears
+import mifos_mobile.feature.loan_account.generated.resources.feature_account_overpaid
 import mifos_mobile.feature.loan_account.generated.resources.feature_account_withdrawn
 import org.jetbrains.compose.resources.stringResource
-import org.mifos.mobile.core.common.Constants
 import org.mifos.mobile.core.common.CurrencyFormatter
 import org.mifos.mobile.core.common.DateHelper
 import org.mifos.mobile.core.model.entity.accounts.loan.LoanAccount
+import org.mifos.mobile.core.model.enums.AccountType
 import org.mifos.mobile.feature.loanaccount.component.AccountCard
 
 @Composable
-fun LoanAccountScreenContent(
+internal fun LoanAccountScreenContent(
     accountList: List<LoanAccount>,
-    onAccountSelected: (String, Long) -> Unit,
+    onAccountSelected: (AccountType, Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val lazyListState = rememberLazyListState()
 
     LazyColumn(
-        modifier = modifier.fillMaxSize().padding(top = 8.dp),
+        modifier = modifier.fillMaxSize().padding(vertical = 8.dp, horizontal = 8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
         state = lazyListState,
     ) {
@@ -58,12 +59,97 @@ fun LoanAccountScreenContent(
 @Composable
 private fun LoanAccountListItem(
     loanAccount: LoanAccount,
-    onAccountSelected: (accountType: String, accountId: Long) -> Unit,
+    onAccountSelected: (accountType: AccountType, accountId: Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val (indicatorColor, statusDescription, balanceTextColor) = getAccountStatusDisplayAttributes(
-        loanAccount = loanAccount,
-    )
+    val (indicatorColor, accountStatus, balanceTextColor) = when {
+        loanAccount.status?.active == true && loanAccount.inArrears == true -> {
+            Triple(
+                first = MaterialTheme.colorScheme.error,
+                second = stringResource(resource = Res.string.feature_account_in_arrears) +
+                    (
+                        loanAccount.timeline?.actualDisbursementDate?.let {
+                            DateHelper.getDateAsString(it)
+                        } ?: ""
+                        ),
+                third = MaterialTheme.colorScheme.error,
+            )
+        }
+
+        loanAccount.status?.active == true -> {
+            Triple(
+                first = MaterialTheme.colorScheme.primary,
+                second = stringResource(resource = Res.string.feature_account_active) +
+                    (
+                        loanAccount.timeline?.actualDisbursementDate?.let {
+                            DateHelper.getDateAsString(it)
+                        } ?: ""
+                        ),
+                third = MaterialTheme.colorScheme.primary,
+            )
+        }
+
+        loanAccount.status?.waitingForDisbursal == true -> {
+            Triple(
+                first = MaterialTheme.colorScheme.secondary,
+                second = stringResource(resource = Res.string.feature_account_disburse) +
+                    (
+                        loanAccount.timeline?.approvedOnDate?.let { DateHelper.getDateAsString(it) }
+                            ?: ""
+                        ),
+                third = null,
+            )
+        }
+
+        loanAccount.status?.pendingApproval == true -> {
+            Triple(
+                first = MaterialTheme.colorScheme.tertiary,
+                second = stringResource(resource = Res.string.feature_account_approval_pending) +
+                    (
+                        loanAccount.timeline?.submittedOnDate?.let { DateHelper.getDateAsString(it) }
+                            ?: ""
+                        ),
+                third = null,
+            )
+        }
+
+        loanAccount.status?.overpaid == true -> {
+            Triple(
+                first = MaterialTheme.colorScheme.tertiaryContainer,
+                second = stringResource(resource = Res.string.feature_account_overpaid) +
+                    (
+                        loanAccount.timeline?.actualDisbursementDate?.let {
+                            DateHelper.getDateAsString(it)
+                        } ?: ""
+                        ),
+                third = MaterialTheme.colorScheme.tertiaryContainer,
+            )
+        }
+
+        loanAccount.status?.closed == true -> {
+            Triple(
+                first = MaterialTheme.colorScheme.onSurface,
+                second = stringResource(resource = Res.string.feature_account_closed) +
+                    (
+                        loanAccount.timeline?.closedOnDate?.let { DateHelper.getDateAsString(it) }
+                            ?: ""
+                        ),
+                third = null,
+            )
+        }
+
+        else -> {
+            Triple(
+                first = MaterialTheme.colorScheme.outline,
+                second = stringResource(resource = Res.string.feature_account_withdrawn) +
+                    (
+                        loanAccount.timeline?.withdrawnOnDate?.let { DateHelper.getDateAsString(it) }
+                            ?: ""
+                        ),
+                third = null,
+            )
+        }
+    }
 
     val formattedBalance = CurrencyFormatter.format(
         balance = loanAccount.loanBalance,
@@ -72,89 +158,14 @@ private fun LoanAccountListItem(
     )
 
     AccountCard(
-        accountNo = loanAccount.accountNo,
-        productName = loanAccount.productName,
-        statusString = statusDescription,
+        loanAccount = loanAccount,
+        accountStatus = accountStatus,
         balance = formattedBalance,
         indicatorColor = indicatorColor,
         textColor = balanceTextColor,
         onClick = {
-            onAccountSelected(Constants.LOAN_ACCOUNTS, loanAccount.id)
+            onAccountSelected(AccountType.LOAN, loanAccount.id)
         },
         modifier = modifier,
     )
-}
-
-@Composable
-private fun getAccountStatusDisplayAttributes(loanAccount: LoanAccount): Triple<Color, String, Color?> {
-    return when {
-        loanAccount.status?.active == true && loanAccount.inArrears == true -> {
-            Triple(
-                MaterialTheme.colorScheme.error,
-                stringResource(resource = Res.string.feature_account_disbursement) +
-                    loanAccount.timeline?.actualDisbursementDate?.let {
-                        DateHelper.getDateAsString(it)
-                    },
-                MaterialTheme.colorScheme.error,
-            )
-        }
-
-        loanAccount.status?.active == true -> {
-            Triple(
-                MaterialTheme.colorScheme.primary,
-                stringResource(resource = Res.string.feature_account_disbursement) +
-                    loanAccount.timeline?.actualDisbursementDate?.let {
-                        DateHelper.getDateAsString(it)
-                    },
-                MaterialTheme.colorScheme.primary,
-            )
-        }
-
-        loanAccount.status?.waitingForDisbursal == true -> {
-            Triple(
-                MaterialTheme.colorScheme.secondary,
-                stringResource(resource = Res.string.feature_account_approved) +
-                    loanAccount.timeline?.approvedOnDate?.let { DateHelper.getDateAsString(it) },
-                null,
-            )
-        }
-
-        loanAccount.status?.pendingApproval == true -> {
-            Triple(
-                MaterialTheme.colorScheme.tertiary,
-                stringResource(resource = Res.string.feature_account_submitted) +
-                    loanAccount.timeline?.submittedOnDate?.let { DateHelper.getDateAsString(it) },
-                null,
-            )
-        }
-
-        loanAccount.status?.overpaid == true -> {
-            Triple(
-                MaterialTheme.colorScheme.tertiaryContainer,
-                stringResource(resource = Res.string.feature_account_approved) +
-                    loanAccount.timeline?.actualDisbursementDate?.let {
-                        DateHelper.getDateAsString(it)
-                    },
-                MaterialTheme.colorScheme.tertiaryContainer,
-            )
-        }
-
-        loanAccount.status?.closed == true -> {
-            Triple(
-                MaterialTheme.colorScheme.onSurface,
-                stringResource(resource = Res.string.feature_account_closed) +
-                    loanAccount.timeline?.closedOnDate?.let { DateHelper.getDateAsString(it) },
-                null,
-            )
-        }
-
-        else -> {
-            Triple(
-                MaterialTheme.colorScheme.outline,
-                stringResource(resource = Res.string.feature_account_withdrawn) +
-                    loanAccount.timeline?.withdrawnOnDate?.let { DateHelper.getDateAsString(it) },
-                null,
-            )
-        }
-    }
 }

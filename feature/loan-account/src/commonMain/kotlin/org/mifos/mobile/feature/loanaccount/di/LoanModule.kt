@@ -7,11 +7,12 @@
  *
  * See https://github.com/openMF/mobile-mobile/blob/master/LICENSE.md
  */
-package org.mifos.mobile.feature.loanaccount.model
+package org.mifos.mobile.feature.loanaccount.di
 
-import org.jetbrains.compose.resources.StringResource
+import org.koin.core.module.dsl.viewModelOf
+import org.koin.dsl.module
+import org.mifos.mobile.feature.loanaccount.viewmodel.LoanAccountViewmodel
 
-internal data class CheckboxStatus(
-    val status: StringResource?,
-    val isChecked: Boolean = false,
-)
+val loanAccountModule = module {
+    viewModelOf(::LoanAccountViewmodel)
+}
