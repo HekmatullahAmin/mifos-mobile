@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,12 +23,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import org.mifos.mobile.core.model.entity.accounts.loan.LoanAccount
 
 @Composable
 fun AccountCard(
-    accountNo: String?,
-    productName: String?,
-    statusString: String?,
+    loanAccount: LoanAccount,
+    accountStatus: String?,
     balance: String,
     indicatorColor: Color,
     textColor: Color?,
@@ -37,6 +38,8 @@ fun AccountCard(
     Card(
         onClick = onClick,
         modifier = modifier,
+        shape = MaterialTheme.shapes.medium,
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
     ) {
         Box {
             AccountTypeItemIndicator(
@@ -48,22 +51,22 @@ fun AccountCard(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Column(modifier = Modifier.padding(start = 12.dp)) {
-                    accountNo?.let {
+                    loanAccount.accountNo?.let {
                         Text(
                             text = it,
                             style = MaterialTheme.typography.bodyLarge,
                         )
                     }
-                    productName?.let {
+                    loanAccount.productName?.let {
                         Text(
                             text = it,
                             style = MaterialTheme.typography.labelLarge,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
                     }
-                    if (statusString != null) {
+                    if (accountStatus != null) {
                         Text(
-                            text = statusString,
+                            text = accountStatus,
                             style = MaterialTheme.typography.labelLarge,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
