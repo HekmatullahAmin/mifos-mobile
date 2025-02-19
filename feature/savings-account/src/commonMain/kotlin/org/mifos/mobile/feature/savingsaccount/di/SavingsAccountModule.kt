@@ -7,12 +7,12 @@
  *
  * See https://github.com/openMF/mobile-mobile/blob/master/LICENSE.md
  */
-package org.mifos.mobile.feature.savingsaccount.screen.utils
+package org.mifos.mobile.feature.savingsaccount.di
 
-import org.mifos.mobile.core.model.entity.accounts.savings.SavingAccount
+import org.koin.core.module.dsl.viewModelOf
+import org.koin.dsl.module
+import org.mifos.mobile.feature.savingsaccount.viewmodel.SavingsAccountViewmodel
 
-sealed class AccountState {
-    data object Loading : AccountState()
-    data object Error : AccountState()
-    data class Success(val savingsAccounts: List<SavingAccount>?) : AccountState()
+val savingsAccountModule = module {
+    viewModelOf(::SavingsAccountViewmodel)
 }
