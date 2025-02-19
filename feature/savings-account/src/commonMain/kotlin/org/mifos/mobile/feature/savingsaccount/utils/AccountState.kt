@@ -7,11 +7,12 @@
  *
  * See https://github.com/openMF/mobile-mobile/blob/master/LICENSE.md
  */
-package org.mifos.mobile.feature.savingsaccount.screen.model
+package org.mifos.mobile.feature.savingsaccount.utils
 
-import org.jetbrains.compose.resources.StringResource
+import org.mifos.mobile.core.model.entity.accounts.savings.SavingAccount
 
-internal data class CheckboxStatus(
-    val status: StringResource?,
-    val isChecked: Boolean = false,
-)
+sealed class AccountState {
+    data object Loading : AccountState()
+    data object Error : AccountState()
+    data class Success(val savingsAccounts: List<SavingAccount>?) : AccountState()
+}

@@ -12,7 +12,7 @@ plugins {
 }
 
 android {
-    namespace = "com.hekmatullahamin.savings_account"
+    namespace = "org.mifos.mobile.feature.savingsaccount"
 }
 
 kotlin {
