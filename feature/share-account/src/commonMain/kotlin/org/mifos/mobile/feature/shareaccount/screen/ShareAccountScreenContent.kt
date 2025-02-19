@@ -20,31 +20,35 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.mifos.mobile.core.model.entity.accounts.share.ShareAccount
+import org.mifos.mobile.core.model.enums.AccountType
 import org.mifos.mobile.feature.shareaccount.component.ShareAccountCard
 
 @Composable
-fun LoanAccountScreenContent(
+internal fun ShareAccountScreenContent(
     accountList: List<ShareAccount>,
+    onAccountSelected: (accountType: AccountType, accountId: Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val lazyListState = rememberLazyListState()
 
     LazyColumn(
-        modifier = modifier.fillMaxSize().padding(top = 8.dp),
+        modifier = modifier.fillMaxSize().padding(horizontal = 8.dp, vertical = 8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
         state = lazyListState,
     ) {
         items(items = accountList, key = { account -> account.id }) { loanAccount ->
-            LoanAccountListItem(
+            ShareAccountListItem(
                 shareAccount = loanAccount,
+                onAccountSelected = onAccountSelected,
             )
         }
     }
 }
 
 @Composable
-private fun LoanAccountListItem(
+private fun ShareAccountListItem(
     shareAccount: ShareAccount,
+    onAccountSelected: (accountType: AccountType, accountId: Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val (indicatorColor, shouldShowAccountDetail) = when {
@@ -69,6 +73,9 @@ private fun LoanAccountListItem(
         shareAccount = shareAccount,
         indicatorColor = indicatorColor,
         shouldShowAccountDetail = shouldShowAccountDetail,
+        onClick = {
+            onAccountSelected(AccountType.SHARE, shareAccount.id)
+        },
         modifier = modifier,
     )
 }
