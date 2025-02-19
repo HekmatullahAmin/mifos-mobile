@@ -18,25 +18,43 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.StringResource
 import org.mifos.mobile.core.data.repository.AccountsRepository
 import org.mifos.mobile.core.data.util.NetworkMonitor
 import org.mifos.mobile.core.datastore.UserPreferencesRepository
 import org.mifos.mobile.core.model.entity.accounts.savings.SavingAccount
 import org.mifos.mobile.core.model.enums.AccountType
-import org.mifos.mobile.feature.savingsaccount.screen.model.CheckboxStatus
 import org.mifos.mobile.feature.savingsaccount.screen.utils.AccountState
 import org.mifos.mobile.feature.savingsaccount.screen.utils.FilterUtil
-import org.mifos.mobile.feature.savingsaccount.screen.utils.StatusUtil
-import org.mifos.mobile.feature.savingsaccount.screen.utils.getSavingsAccountFilterLabels
 
+/**
+ * ViewModel responsible for managing savings accounts and their states.
+ *
+ * This ViewModel interacts with repositories to fetch, filter, and manage savings accounts.
+ * It also monitors network connectivity and manages UI state updates.
+ *
+ * @property accountsRepositoryImpl Repository responsible for fetching savings accounts.
+ * @property networkMonitor Monitors the network status.
+ * @property userPreferencesRepository Stores user-related preferences, including client ID.
+ */
 class SavingsAccountViewmodel(
     private val accountsRepositoryImpl: AccountsRepository,
     networkMonitor: NetworkMonitor,
     userPreferencesRepository: UserPreferencesRepository,
 ) : ViewModel() {
 
+    /** Client ID retrieved from user preferences. */
     private val clientId = requireNotNull(userPreferencesRepository.clientId.value)
 
+    /**
+     * Tracks whether a refresh operation is in progress.
+     *
+     * Used by [PullToRefreshBox] to indicate whether the list is currently refreshing.
+     */
+    private val _isRefreshing = MutableStateFlow(false)
+    val isRefreshing: StateFlow<Boolean> get() = _isRefreshing.asStateFlow()
+
+    /** Tracks network availability using [NetworkMonitor]. */
     val isNetworkAvailable = networkMonitor.isOnline
         .stateIn(
             scope = viewModelScope,
@@ -44,10 +62,18 @@ class SavingsAccountViewmodel(
             initialValue = false,
         )
 
+    /** Holds the current state of savings accounts UI. */
     @Suppress("PropertyName")
     private val _accountsUiState = MutableStateFlow<AccountState>(AccountState.Loading)
     val accountUiState: StateFlow<AccountState> = _accountsUiState.asStateFlow()
 
+    /**
+     * Filters savings accounts based on the search query.
+     *
+     * @param accounts List of savings accounts.
+     * @param searchQuery Search query string.
+     * @return Filtered list of savings accounts that match the search query.
+     */
     private fun filterAccountsBySearchQuery(
         accounts: List<SavingAccount?>?,
         searchQuery: String?,
@@ -62,83 +88,63 @@ class SavingsAccountViewmodel(
         }.filterNotNull()
     }
 
-    //    private fun getFilterSavingsAccountList(
+    /**
+     * Filters savings accounts based on selected filter labels using [FilterUtil].
+     *
+     * @param accounts List of savings accounts.
+     * @param selectedCheckboxLabels List of selected filter labels.
+     * @return List of savings accounts that match the selected filters.
+     */
     private fun filterAccountsByStatus(
-        accountsList: List<SavingAccount?>,
-        filterList: List<CheckboxStatus>,
+        accounts: List<SavingAccount>,
+        selectedCheckboxLabels: List<StringResource?>,
     ): List<SavingAccount> {
-        val savingsAccountFilterCriteria = getSavingsAccountFilterLabels()
-
-        return filterList
-            .filter { it.isChecked }
-            .flatMap { selectedCheckboxStatus ->
-                getAccountsMatchingStatus(
-                    accounts = accountsList,
-                    status = selectedCheckboxStatus,
-                    statusCriteria = savingsAccountFilterCriteria,
-                )
+        return selectedCheckboxLabels
+            .mapNotNull { label -> FilterUtil.fromLabel(label) }
+            .flatMap { filterUtil ->
+                accounts.filter(filterUtil.matchCondition)
             }
             .distinct()
     }
 
-    private fun getAccountsMatchingStatus(
-        accounts: List<SavingAccount?>?,
-        status: CheckboxStatus?,
-        statusCriteria: FilterUtil,
-    ): List<SavingAccount> {
-        return accounts.orEmpty().filter { account ->
-            when {
-                status?.status == statusCriteria.activeString && account?.status?.active == true -> true
-                status?.status == statusCriteria.approvedString && account?.status?.approved == true -> true
-                status?.status == statusCriteria.approvalPendingString &&
-                    account?.status?.submittedAndPendingApproval == true -> true
-
-                status?.status == statusCriteria.maturedString && account?.status?.matured == true -> true
-                status?.status == statusCriteria.closedString && account?.status?.closed == true -> true
-                else -> false
-            }
-        }.filterNotNull()
-    }
-
-    fun getUpdatedFilteredAccountList(
+    /**
+     * Retrieves savings accounts based on search query and selected filters.
+     *
+     * @param searchQuery The search term entered by the user.
+     * @param isFiltered Whether filtering by status is enabled.
+     * @param isSearchActive Whether the search query is active.
+     * @param selectedCheckboxLabels List of selected filter labels.
+     * @param accounts The list of all savings accounts.
+     * @return A filtered list of savings accounts based on the applied filters.
+     */
+    fun getFilteredAccounts(
         searchQuery: String,
         isFiltered: Boolean,
         isSearchActive: Boolean,
-        accountList: List<SavingAccount>,
+        selectedCheckboxLabels: List<StringResource?>,
+        accounts: List<SavingAccount>,
     ): List<SavingAccount> {
-        return when {
-            isFiltered && isSearchActive -> {
-                val updatedFilterList = filterAccountsByStatus(
-                    accountsList = accountList,
-                    filterList = StatusUtil.getSavingsAccountStatusList(),
-                )
-
-                filterAccountsBySearchQuery(
-                    accounts = updatedFilterList,
-                    searchQuery = searchQuery,
-                )
-            }
-
-            isSearchActive -> {
-                filterAccountsBySearchQuery(
-                    accounts = accountList,
-                    searchQuery = searchQuery,
-                )
-            }
-
-            isFiltered -> {
-                filterAccountsByStatus(
-                    accountsList = accountList,
-                    filterList = StatusUtil.getSavingsAccountStatusList(),
-                )
-            }
-
-            else -> {
-                accountList
-            }
-        }
+        val filteredByStatus = if (isFiltered) filterAccountsByStatus(accounts, selectedCheckboxLabels) else accounts
+        return if (isSearchActive) filterAccountsBySearchQuery(filteredByStatus, searchQuery) else filteredByStatus
     }
 
+    /**
+     * Triggers a refresh operation when the user pulls down to refresh.
+     *
+     * This function is called by [PullToRefreshBox] to reload savings accounts.
+     */
+    fun refresh() {
+        _isRefreshing.value = true
+        loadSavingsAccounts()
+    }
+
+    /**
+     * Loads savings accounts for the client and updates the UI state.
+     *
+     * This function fetches savings accounts from the repository and updates the UI accordingly.
+     * If an error occurs during fetching, it updates the UI state to [AccountState.Error].
+     * Once accounts are successfully loaded, [_isRefreshing] is reset to false.
+     */
     fun loadSavingsAccounts() {
         viewModelScope.launch {
             _accountsUiState.value = AccountState.Loading
@@ -150,6 +156,7 @@ class SavingsAccountViewmodel(
             }.collect { clientAccounts ->
                 _accountsUiState.value =
                     AccountState.Success(clientAccounts.data?.savingsAccounts)
+                _isRefreshing.value = false
             }
         }
     }

@@ -12,7 +12,7 @@ plugins {
 }
 
 android {
-    namespace = "com.hekmatullahamin.loan_account"
+    namespace = "com.hekmatullahamin.loanaccount"
 }
 
 kotlin {
@@ -24,7 +24,6 @@ kotlin {
 
             api(projects.core.ui)
             api(projects.core.model)
-            api(projects.core.common)
         }
     }
 }

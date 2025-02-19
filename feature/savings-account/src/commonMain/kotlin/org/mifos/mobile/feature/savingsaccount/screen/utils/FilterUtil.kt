@@ -16,20 +16,73 @@ import mifos_mobile.feature.savings_account.generated.resources.feature_account_
 import mifos_mobile.feature.savings_account.generated.resources.feature_account_closed
 import mifos_mobile.feature.savings_account.generated.resources.feature_account_matured
 import org.jetbrains.compose.resources.StringResource
+import org.mifos.mobile.core.model.entity.accounts.savings.SavingAccount
 
-data class FilterUtil(
-    val activeString: StringResource,
-    val approvedString: StringResource,
-    val approvalPendingString: StringResource,
-    val maturedString: StringResource,
-    val closedString: StringResource,
-)
+/**
+ * Enum class representing different filters that can be applied to savings accounts.
+ *
+ * Each filter has a corresponding label (for UI representation) and a match condition
+ * that determines whether a given [SavingAccount] meets the criteria for the filter.
+ *
+ * @property label The string resource representing the filter name.
+ * @property matchCondition A lambda function that checks if a [SavingAccount] meets the filter condition.
+ */
+enum class FilterUtil(val label: StringResource, val matchCondition: (SavingAccount) -> Boolean) {
 
-fun getSavingsAccountFilterLabels() =
-    FilterUtil(
-        activeString = Res.string.feature_account_active,
-        approvedString = Res.string.feature_account_approved,
-        approvalPendingString = Res.string.feature_account_approval_pending,
-        maturedString = Res.string.feature_account_matured,
-        closedString = Res.string.feature_account_closed,
-    )
+    /**
+     * Filter for active savings accounts.
+     * Matches if the savings account's status is active.
+     */
+    ACTIVE(
+        label = Res.string.feature_account_active,
+        matchCondition = { it.status?.active == true },
+    ),
+
+    /**
+     * Filter for approved savings accounts.
+     * Matches if the savings account's status indicates it is approved.
+     */
+    APPROVED(
+        label = Res.string.feature_account_approved,
+        matchCondition = { it.status?.approved == true },
+    ),
+
+    /**
+     * Filter for savings accounts that are pending approval.
+     * Matches if the savings account's status indicates it is submitted and pending approval.
+     */
+    APPROVAL_PENDING(
+        label = Res.string.feature_account_approval_pending,
+        matchCondition = { it.status?.submittedAndPendingApproval == true },
+    ),
+
+    /**
+     * Filter for matured savings accounts.
+     * Matches if the savings account's status indicates it has matured.
+     */
+    MATURED(
+        label = Res.string.feature_account_matured,
+        matchCondition = { it.status?.matured == true },
+    ),
+
+    /**
+     * Filter for closed savings accounts.
+     * Matches if the savings account's status indicates it has been closed.
+     */
+    CLOSED(
+        label = Res.string.feature_account_closed,
+        matchCondition = { it.status?.closed == true },
+    ),
+    ;
+
+    companion object {
+
+        /**
+         * Retrieves a [FilterUtil] instance based on the provided label.
+         *
+         * @param label The label to match against.
+         * @return The corresponding [FilterUtil] instance if found, otherwise null.
+         */
+        fun fromLabel(label: StringResource?): FilterUtil? = entries.find { it.label == label }
+    }
+}

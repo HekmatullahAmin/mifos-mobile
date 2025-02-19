@@ -18,7 +18,6 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import mifos_mobile.feature.savings_account.generated.resources.Res
 import mifos_mobile.feature.savings_account.generated.resources.feature_account_active
@@ -28,22 +27,23 @@ import mifos_mobile.feature.savings_account.generated.resources.feature_account_
 import mifos_mobile.feature.savings_account.generated.resources.feature_account_string_and_string
 import mifos_mobile.feature.savings_account.generated.resources.feature_account_submitted
 import org.jetbrains.compose.resources.stringResource
-import org.mifos.mobile.core.common.Constants
 import org.mifos.mobile.core.common.CurrencyFormatter
 import org.mifos.mobile.core.common.DateHelper
 import org.mifos.mobile.core.model.entity.accounts.savings.SavingAccount
+import org.mifos.mobile.core.model.enums.AccountType
 import org.mifos.mobile.feature.savingsaccount.screen.component.AccountCard
 
 @Composable
-fun SavingsAccountScreenContent(
+internal fun SavingsAccountScreenContent(
     accountList: List<SavingAccount>,
-    onAccountSelected: (String, Long) -> Unit,
+    onAccountSelected: (AccountType, Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val lazyListState = rememberLazyListState()
 
     LazyColumn(
-        modifier = modifier.fillMaxSize().padding(top = 8.dp),
+        modifier = modifier.fillMaxSize()
+            .padding(horizontal = 8.dp, vertical = 8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
         state = lazyListState,
     ) {
@@ -59,12 +59,85 @@ fun SavingsAccountScreenContent(
 @Composable
 private fun SavingsAccountListItem(
     savingAccount: SavingAccount,
-    onAccountSelected: (accountType: String, accountId: Long) -> Unit,
+    onAccountSelected: (accountType: AccountType, accountId: Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val (indicatorColor, statusDescription, balanceTextColor) = getAccountStatusDisplayAttributes(
-        savingAccount = savingAccount,
-    )
+    val (indicatorColor, statusDescription, balanceTextColor) = when {
+        savingAccount.status?.active == true -> {
+            Triple(
+                first = MaterialTheme.colorScheme.primary,
+                second = stringResource(Res.string.feature_account_active) +
+                    (
+                        savingAccount.lastActiveTransactionDate?.let {
+                            DateHelper.getDateAsString(
+                                it,
+                            )
+                        } ?: ""
+                        ),
+                third = MaterialTheme.colorScheme.primary,
+            )
+        }
+
+        savingAccount.status?.approved == true -> {
+            Triple(
+                first = MaterialTheme.colorScheme.secondaryContainer,
+                second = stringResource(Res.string.feature_account_approved) +
+                    (
+                        savingAccount.timeLine?.approvedOnDate?.let {
+                            DateHelper.getDateAsString(
+                                it,
+                            )
+                        } ?: ""
+                        ),
+                third = null,
+            )
+        }
+
+        savingAccount.status?.submittedAndPendingApproval == true -> {
+            Triple(
+                first = MaterialTheme.colorScheme.tertiaryContainer,
+                second = stringResource(Res.string.feature_account_submitted) +
+                    (
+                        savingAccount.timeLine?.submittedOnDate?.let {
+                            DateHelper.getDateAsString(
+                                it,
+                            )
+                        } ?: ""
+                        ),
+                third = null,
+            )
+        }
+
+        savingAccount.status?.matured == true -> {
+            Triple(
+                first = MaterialTheme.colorScheme.errorContainer,
+                second = stringResource(Res.string.feature_account_matured) +
+                    (
+                        savingAccount.lastActiveTransactionDate?.let {
+                            DateHelper.getDateAsString(
+                                it,
+                            )
+                        } ?: ""
+                        ),
+                third = MaterialTheme.colorScheme.errorContainer,
+            )
+        }
+
+        else -> {
+            Triple(
+                first = MaterialTheme.colorScheme.surfaceVariant,
+                second = stringResource(Res.string.feature_account_closed) + (
+                    savingAccount.timeLine?.closedOnDate?.let {
+                        DateHelper.getDateAsString(
+                            it,
+                        )
+                    }
+                        ?: ""
+                    ),
+                third = null,
+            )
+        }
+    }
 
     val currencySymbolOrCode =
         savingAccount.currency?.displaySymbol ?: savingAccount.currency?.code ?: ""
@@ -89,70 +162,8 @@ private fun SavingsAccountListItem(
         indicatorColor = indicatorColor,
         textColor = balanceTextColor,
         onClick = {
-            onAccountSelected(Constants.SAVINGS_ACCOUNTS, savingAccount.id)
+            onAccountSelected(AccountType.SAVINGS, savingAccount.id)
         },
         modifier = modifier,
     )
-}
-
-@Composable
-private fun getAccountStatusDisplayAttributes(savingAccount: SavingAccount): Triple<Color, String, Color?> {
-    return when {
-        savingAccount.status?.active == true -> {
-            Triple(
-                MaterialTheme.colorScheme.primary,
-                stringResource(Res.string.feature_account_active) +
-                    savingAccount.lastActiveTransactionDate?.let { DateHelper.getDateAsString(it) },
-                MaterialTheme.colorScheme.primary,
-            )
-        }
-
-        savingAccount.status?.approved == true -> {
-            Triple(
-                MaterialTheme.colorScheme.secondaryContainer,
-                stringResource(Res.string.feature_account_approved) +
-                    (
-                        savingAccount.timeLine?.approvedOnDate?.let { DateHelper.getDateAsString(it) }
-                            ?: ""
-                        ),
-                null,
-            )
-        }
-
-        savingAccount.status?.submittedAndPendingApproval == true -> {
-            Triple(
-                MaterialTheme.colorScheme.tertiaryContainer,
-                stringResource(Res.string.feature_account_submitted) +
-                    (
-                        savingAccount.timeLine?.submittedOnDate?.let {
-                            DateHelper.getDateAsString(
-                                it,
-                            )
-                        }
-                        ),
-                null,
-            )
-        }
-
-        savingAccount.status?.matured == true -> {
-            Triple(
-                MaterialTheme.colorScheme.errorContainer,
-                stringResource(Res.string.feature_account_matured) +
-                    savingAccount.lastActiveTransactionDate?.let { DateHelper.getDateAsString(it) },
-                MaterialTheme.colorScheme.errorContainer,
-            )
-        }
-
-        else -> {
-            Triple(
-                MaterialTheme.colorScheme.surfaceVariant,
-                stringResource(Res.string.feature_account_closed) +
-                    (
-                        savingAccount.timeLine?.closedOnDate?.let { DateHelper.getDateAsString(it) }
-                            ?: ""
-                        ),
-                null,
-            )
-        }
-    }
 }

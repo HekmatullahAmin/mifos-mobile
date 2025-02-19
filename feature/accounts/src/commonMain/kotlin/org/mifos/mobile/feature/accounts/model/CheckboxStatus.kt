@@ -7,11 +7,11 @@
  *
  * See https://github.com/openMF/mobile-mobile/blob/master/LICENSE.md
  */
-package org.mifos.mobile.feature.savingsaccount.screen.model
+package org.mifos.mobile.feature.accounts.model
 
 import org.jetbrains.compose.resources.StringResource
 
 internal data class CheckboxStatus(
-    val status: StringResource?,
+    val statusLabel: StringResource?,
     val isChecked: Boolean = false,
 )
