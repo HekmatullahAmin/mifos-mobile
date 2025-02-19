@@ -7,7 +7,7 @@
  *
  * See https://github.com/openMF/mobile-mobile/blob/master/LICENSE.md
  */
-package org.mifos.mobile.feature.savingsaccount.screen.component
+package org.mifos.mobile.feature.savingsaccount.component
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
