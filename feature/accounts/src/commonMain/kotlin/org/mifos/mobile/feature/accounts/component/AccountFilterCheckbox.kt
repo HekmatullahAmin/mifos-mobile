@@ -68,9 +68,10 @@ internal fun AccountFilterCheckBox(
 private fun AccountCheckBoxItem(
     checkboxStatus: CheckboxStatus,
     onCheckedChange: (Boolean) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 12.dp, vertical = 4.dp),
         verticalAlignment = Alignment.CenterVertically,

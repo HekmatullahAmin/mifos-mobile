@@ -35,7 +35,7 @@ object StatusUtils {
      * @return A list of [CheckboxStatus] representing different savings account statuses.
      */
     internal fun getSavingsAccountCheckboxes(): List<CheckboxStatus> {
-        return arrayListOf(
+        return listOf(
             CheckboxStatus(
                 Res.string.feature_account_active,
             ),
@@ -63,7 +63,7 @@ object StatusUtils {
      * @return A list of [CheckboxStatus] representing different loan account statuses.
      */
     internal fun getLoanAccountCheckboxes(): List<CheckboxStatus> {
-        return arrayListOf(
+        return listOf(
             CheckboxStatus(
                 Res.string.feature_account_active,
             ),
@@ -94,7 +94,7 @@ object StatusUtils {
      * @return A list of [CheckboxStatus] representing different share account statuses.
      */
     internal fun getShareAccountCheckboxes(): List<CheckboxStatus> {
-        return arrayListOf(
+        return listOf(
             CheckboxStatus(
                 Res.string.feature_account_active,
             ),
