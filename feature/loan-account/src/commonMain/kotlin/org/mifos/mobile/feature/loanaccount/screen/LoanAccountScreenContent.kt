@@ -47,7 +47,10 @@ internal fun LoanAccountScreenContent(
         verticalArrangement = Arrangement.spacedBy(8.dp),
         state = lazyListState,
     ) {
-        items(items = accountList, key = { account -> account.id }) { loanAccount ->
+        items(
+            items = accountList,
+            key = { account -> account.id },
+        ) { loanAccount ->
             LoanAccountListItem(
                 loanAccount = loanAccount,
                 onAccountSelected = onAccountSelected,
@@ -94,7 +97,11 @@ private fun LoanAccountListItem(
                 first = MaterialTheme.colorScheme.secondary,
                 second = stringResource(resource = Res.string.feature_account_disburse) +
                     (
-                        loanAccount.timeline?.approvedOnDate?.let { DateHelper.getDateAsString(it) }
+                        loanAccount.timeline?.approvedOnDate?.let {
+                            DateHelper.getDateAsString(
+                                it,
+                            )
+                        }
                             ?: ""
                         ),
                 third = null,
@@ -106,7 +113,11 @@ private fun LoanAccountListItem(
                 first = MaterialTheme.colorScheme.tertiary,
                 second = stringResource(resource = Res.string.feature_account_approval_pending) +
                     (
-                        loanAccount.timeline?.submittedOnDate?.let { DateHelper.getDateAsString(it) }
+                        loanAccount.timeline?.submittedOnDate?.let {
+                            DateHelper.getDateAsString(
+                                it,
+                            )
+                        }
                             ?: ""
                         ),
                 third = null,
@@ -131,7 +142,11 @@ private fun LoanAccountListItem(
                 first = MaterialTheme.colorScheme.onSurface,
                 second = stringResource(resource = Res.string.feature_account_closed) +
                     (
-                        loanAccount.timeline?.closedOnDate?.let { DateHelper.getDateAsString(it) }
+                        loanAccount.timeline?.closedOnDate?.let {
+                            DateHelper.getDateAsString(
+                                it,
+                            )
+                        }
                             ?: ""
                         ),
                 third = null,
@@ -143,7 +158,11 @@ private fun LoanAccountListItem(
                 first = MaterialTheme.colorScheme.outline,
                 second = stringResource(resource = Res.string.feature_account_withdrawn) +
                     (
-                        loanAccount.timeline?.withdrawnOnDate?.let { DateHelper.getDateAsString(it) }
+                        loanAccount.timeline?.withdrawnOnDate?.let {
+                            DateHelper.getDateAsString(
+                                it,
+                            )
+                        }
                             ?: ""
                         ),
                 third = null,
