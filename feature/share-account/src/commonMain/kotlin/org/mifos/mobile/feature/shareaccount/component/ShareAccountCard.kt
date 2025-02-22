@@ -26,7 +26,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import mifos_mobile.feature.share_account.generated.resources.Res
 import mifos_mobile.feature.share_account.generated.resources.feature_account_approved
-import mifos_mobile.feature.share_account.generated.resources.feature_account_pending
 import org.jetbrains.compose.resources.stringResource
 import org.mifos.mobile.core.model.entity.accounts.share.ShareAccount
 
@@ -34,6 +33,7 @@ import org.mifos.mobile.core.model.entity.accounts.share.ShareAccount
 fun ShareAccountCard(
     shareAccount: ShareAccount,
     indicatorColor: Color,
+    statusDescription: String,
     shouldShowAccountDetail: Boolean,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -71,7 +71,7 @@ fun ShareAccountCard(
                 ) {
                     Row {
                         Text(
-                            text = stringResource(resource = Res.string.feature_account_pending),
+                            text = statusDescription,
                             style = MaterialTheme.typography.labelLarge,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
