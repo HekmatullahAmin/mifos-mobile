@@ -14,5 +14,6 @@ import org.mifos.mobile.core.model.entity.accounts.savings.SavingAccount
 sealed class AccountState {
     data object Loading : AccountState()
     data object Error : AccountState()
-    data class Success(val savingsAccounts: List<SavingAccount>?) : AccountState()
+    data object Empty : AccountState()
+    data class Success(val filteredSavingsAccounts: List<SavingAccount>) : AccountState()
 }

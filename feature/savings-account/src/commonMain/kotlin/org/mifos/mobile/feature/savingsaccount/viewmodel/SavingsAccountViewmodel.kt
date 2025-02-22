@@ -68,6 +68,16 @@ class SavingsAccountViewmodel(
     val accountUiState: StateFlow<AccountState> = _accountsUiState.asStateFlow()
 
     /**
+     * Initializes the ViewModel by loading savings accounts with default parameters.
+     */
+    init {
+        loadSavingsAccounts(
+            searchQuery = "",
+            selectedCheckboxLabels = emptyList(),
+        )
+    }
+
+    /**
      * Filters savings accounts based on the search query.
      *
      * @param accounts List of savings accounts.
@@ -110,42 +120,66 @@ class SavingsAccountViewmodel(
     /**
      * Retrieves savings accounts based on search query and selected filters.
      *
+     * This function applies both the search query and status filters, if provided.
+     *
      * @param searchQuery The search term entered by the user.
-     * @param isFiltered Whether filtering by status is enabled.
-     * @param isSearchActive Whether the search query is active.
      * @param selectedCheckboxLabels List of selected filter labels.
      * @param accounts The list of all savings accounts.
      * @return A filtered list of savings accounts based on the applied filters.
      */
-    fun getFilteredAccounts(
+    private fun getFilteredAccounts(
         searchQuery: String,
-        isFiltered: Boolean,
-        isSearchActive: Boolean,
         selectedCheckboxLabels: List<StringResource?>,
         accounts: List<SavingAccount>,
     ): List<SavingAccount> {
-        val filteredByStatus = if (isFiltered) filterAccountsByStatus(accounts, selectedCheckboxLabels) else accounts
-        return if (isSearchActive) filterAccountsBySearchQuery(filteredByStatus, searchQuery) else filteredByStatus
+        val filteredByStatus = if (selectedCheckboxLabels.isNotEmpty()) {
+            filterAccountsByStatus(accounts, selectedCheckboxLabels)
+        } else {
+            accounts
+        }
+
+        return if (searchQuery.isNotBlank()) {
+            filterAccountsBySearchQuery(filteredByStatus, searchQuery)
+        } else {
+            filteredByStatus
+        }
     }
 
     /**
      * Triggers a refresh operation when the user pulls down to refresh.
      *
      * This function is called by [PullToRefreshBox] to reload savings accounts.
+     *
+     * @param searchQuery The current search query input by the user.
+     * @param selectedCheckboxLabels List of currently selected filter labels.
      */
-    fun refresh() {
+    fun refresh(
+        searchQuery: String,
+        selectedCheckboxLabels: List<StringResource?>,
+    ) {
         _isRefreshing.value = true
-        loadSavingsAccounts()
+        loadSavingsAccounts(
+            searchQuery = searchQuery,
+            selectedCheckboxLabels = selectedCheckboxLabels,
+        )
     }
 
     /**
      * Loads savings accounts for the client and updates the UI state.
      *
-     * This function fetches savings accounts from the repository and updates the UI accordingly.
-     * If an error occurs during fetching, it updates the UI state to [AccountState.Error].
+     * This function fetches savings accounts from the repository, applies filtering,
+     * and updates the UI accordingly. If an error occurs during fetching, it updates
+     * the UI state to [AccountState.Error].
+     *
      * Once accounts are successfully loaded, [_isRefreshing] is reset to false.
+     *
+     * @param searchQuery The search query to filter accounts.
+     * @param selectedCheckboxLabels List of selected filter labels for filtering accounts.
      */
-    fun loadSavingsAccounts() {
+    fun loadSavingsAccounts(
+        searchQuery: String,
+        selectedCheckboxLabels: List<StringResource?>,
+    ) {
         viewModelScope.launch {
             _accountsUiState.value = AccountState.Loading
             accountsRepositoryImpl.loadAccounts(
@@ -154,8 +188,17 @@ class SavingsAccountViewmodel(
             ).catch {
                 _accountsUiState.value = AccountState.Error
             }.collect { clientAccounts ->
-                _accountsUiState.value =
-                    AccountState.Success(clientAccounts.data?.savingsAccounts)
+                val savingsAccounts = clientAccounts.data?.savingsAccounts
+                _accountsUiState.value = if (savingsAccounts.isNullOrEmpty()) {
+                    AccountState.Empty
+                } else {
+                    val filteredAccounts = getFilteredAccounts(
+                        searchQuery = searchQuery,
+                        selectedCheckboxLabels = selectedCheckboxLabels,
+                        accounts = savingsAccounts,
+                    )
+                    AccountState.Success(filteredAccounts)
+                }
                 _isRefreshing.value = false
             }
         }

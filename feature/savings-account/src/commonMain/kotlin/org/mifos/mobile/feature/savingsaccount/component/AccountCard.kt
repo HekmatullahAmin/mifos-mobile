@@ -23,11 +23,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import org.mifos.mobile.core.model.entity.accounts.savings.SavingAccount
 
 @Composable
 fun AccountCard(
-    accountNo: String?,
-    productName: String?,
+    savingAccount: SavingAccount,
     statusString: String?,
     balance: String,
     indicatorColor: Color,
@@ -51,13 +51,13 @@ fun AccountCard(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Column(modifier = Modifier.padding(start = 12.dp)) {
-                    accountNo?.let {
+                    savingAccount.accountNo?.let {
                         Text(
                             text = it,
                             style = MaterialTheme.typography.bodyLarge,
                         )
                     }
-                    productName?.let {
+                    savingAccount.productName?.let {
                         Text(
                             text = it,
                             style = MaterialTheme.typography.labelLarge,

@@ -27,7 +27,10 @@ import org.mifos.mobile.core.model.entity.accounts.savings.SavingAccount
  * @property label The string resource representing the filter name.
  * @property matchCondition A lambda function that checks if a [SavingAccount] meets the filter condition.
  */
-enum class FilterUtil(val label: StringResource, val matchCondition: (SavingAccount) -> Boolean) {
+enum class FilterUtil(
+    val label: StringResource,
+    val matchCondition: (SavingAccount) -> Boolean,
+) {
 
     /**
      * Filter for active savings accounts.

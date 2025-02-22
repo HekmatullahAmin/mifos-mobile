@@ -47,7 +47,10 @@ internal fun SavingsAccountScreenContent(
         verticalArrangement = Arrangement.spacedBy(8.dp),
         state = lazyListState,
     ) {
-        items(items = accountList, key = { account -> account.id }) { savingAccount ->
+        items(
+            items = accountList,
+            key = { account -> account.id },
+        ) { savingAccount ->
             SavingsAccountListItem(
                 savingAccount = savingAccount,
                 onAccountSelected = onAccountSelected,
@@ -155,8 +158,7 @@ private fun SavingsAccountListItem(
     )
 
     AccountCard(
-        accountNo = savingAccount.accountNo,
-        productName = savingAccount.productName,
+        savingAccount = savingAccount,
         statusString = statusDescription,
         balance = amountAndCurrency,
         indicatorColor = indicatorColor,
