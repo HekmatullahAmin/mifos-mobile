@@ -25,6 +25,9 @@ import mifos_mobile.feature.share_account.generated.resources.feature_account_er
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.vectorResource
 import org.koin.compose.viewmodel.koinViewModel
+import org.mifos.mobile.core.model.entity.accounts.savings.Currency
+import org.mifos.mobile.core.model.entity.accounts.share.ShareAccount
+import org.mifos.mobile.core.model.entity.accounts.share.Status
 import org.mifos.mobile.core.model.enums.AccountType
 import org.mifos.mobile.core.ui.component.EmptyDataView
 import org.mifos.mobile.core.ui.component.MifosErrorComponent
@@ -37,8 +40,8 @@ import org.mifos.mobile.feature.shareaccount.viewmodel.ShareAccountViewModel
 fun ShareAccountScreen(
     checkboxOptionsLabels: List<StringResource?>,
     searchQuery: String,
-    isSearchActive: Boolean,
-    isFiltered: Boolean,
+//    isSearchActive: Boolean,
+//    isFiltered: Boolean,
     onAccountSelected: (accountType: AccountType, accountId: Long) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: ShareAccountViewModel = koinViewModel(),
@@ -49,13 +52,28 @@ fun ShareAccountScreen(
 
     val pullToRefreshState = rememberPullToRefreshState()
 
-    LaunchedEffect(Unit) {
-        viewModel.loadSavingsAccounts()
+//    LaunchedEffect(Unit) {
+//        viewModel.loadSavingsAccounts()
+//    }
+
+    LaunchedEffect(checkboxOptionsLabels, searchQuery) {
+        viewModel.loadSavingsAccounts(
+            searchQuery = searchQuery,
+//            isFiltered = isFiltered,
+//            isSearchActive = isSearchActive,
+            selectedCheckboxLabels = checkboxOptionsLabels
+        )
     }
 
     PullToRefreshBox(
         state = pullToRefreshState,
-        onRefresh = viewModel::refresh,
+//        onRefresh = viewModel::refresh,
+        onRefresh = {
+            viewModel.refresh(
+                searchQuery = searchQuery,
+                selectedCheckboxLabels = checkboxOptionsLabels
+            )
+        },
         isRefreshing = isRefreshing,
         modifier = modifier,
     ) {
@@ -64,7 +82,13 @@ fun ShareAccountScreen(
                 MifosErrorComponent(
                     isNetworkConnected = isNetworkAvailable,
                     isRetryEnabled = true,
-                    onRetry = viewModel::loadSavingsAccounts,
+//                    onRetry = viewModel::loadSavingsAccounts,
+                    onRetry = {
+                        viewModel.loadSavingsAccounts(
+                            searchQuery = searchQuery,
+                            selectedCheckboxLabels = checkboxOptionsLabels
+                        )
+                    },
                 )
             }
 
@@ -72,37 +96,43 @@ fun ShareAccountScreen(
                 MifosProgressIndicatorOverlay()
             }
 
+            is AccountState.Empty ->{
+                EmptyDataView(
+                    icon = vectorResource(resource = Res.drawable.feature_account_error_black),
+                    error = Res.string.feature_account_empty_share_accounts,
+                    modifier = Modifier.fillMaxSize(),
+                )
+            }
+
             is AccountState.Success -> {
-                val shareAccounts = state.shareAccounts
-                if (shareAccounts.isNullOrEmpty()) {
-                    EmptyDataView(
-                        icon = vectorResource(resource = Res.drawable.feature_account_error_black),
-                        error = Res.string.feature_account_empty_share_accounts,
-                        modifier = Modifier.fillMaxSize(),
-                    )
-                } else {
-                    val updatedFilteredAccounts =
-                        remember(
-                            searchQuery,
-                            isFiltered,
-                            isSearchActive,
-                            shareAccounts,
-                            checkboxOptionsLabels,
-                        ) {
-                            viewModel.getFilteredAccounts(
-                                searchQuery = searchQuery,
-                                isFiltered = isFiltered,
-                                isSearchActive = isSearchActive,
-                                selectedCheckboxLabels = checkboxOptionsLabels,
-                                accounts = shareAccounts,
-                            )
-                        }
+                val shareAccounts = state.filteredShareAccounts
+
+//                if (shareAccounts.isNullOrEmpty()) {
+//
+//                } else {
+//                    val updatedFilteredAccounts =
+//                        remember(
+//                            searchQuery,
+//                            isFiltered,
+//                            isSearchActive,
+//                            shareAccounts,
+//                            checkboxOptionsLabels,
+//                        ) {
+//                            viewModel.getFilteredAccounts(
+//                                searchQuery = searchQuery,
+//                                isFiltered = isFiltered,
+//                                isSearchActive = isSearchActive,
+//                                selectedCheckboxLabels = checkboxOptionsLabels,
+//                                accounts = shareAccounts,
+//                            )
+//                        }
 
                     ShareAccountScreenContent(
-                        accountList = updatedFilteredAccounts,
+//                        accountList = updatedFilteredAccounts,
+                        accountList = shareAccounts,
                         onAccountSelected = onAccountSelected,
                     )
-                }
+//                }
             }
         }
     }

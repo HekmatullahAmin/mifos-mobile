@@ -14,6 +14,7 @@ import mifos_mobile.feature.share_account.generated.resources.feature_account_ac
 import mifos_mobile.feature.share_account.generated.resources.feature_account_approval_pending
 import mifos_mobile.feature.share_account.generated.resources.feature_account_approved
 import mifos_mobile.feature.share_account.generated.resources.feature_account_closed
+import mifos_mobile.feature.share_account.generated.resources.feature_account_rejected
 import org.jetbrains.compose.resources.StringResource
 import org.mifos.mobile.core.model.entity.accounts.share.ShareAccount
 
@@ -45,6 +46,8 @@ enum class FilterUtil(val label: StringResource, val matchCondition: (ShareAccou
      * Matches if the share account's status indicates it is submitted and pending approval.
      */
     APPROVAL_PENDING(Res.string.feature_account_approval_pending, { it.status?.submittedAndPendingApproval == true }),
+
+    REJECTED(Res.string.feature_account_rejected, { it.status?.rejected == true }),
 
     /**
      * Filter for closed share accounts.

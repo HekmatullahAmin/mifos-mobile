@@ -22,7 +22,9 @@ import org.jetbrains.compose.resources.StringResource
 import org.mifos.mobile.core.data.repository.AccountsRepository
 import org.mifos.mobile.core.data.util.NetworkMonitor
 import org.mifos.mobile.core.datastore.UserPreferencesRepository
+import org.mifos.mobile.core.model.entity.accounts.loan.Currency
 import org.mifos.mobile.core.model.entity.accounts.loan.LoanAccount
+import org.mifos.mobile.core.model.entity.accounts.loan.Status
 import org.mifos.mobile.core.model.enums.AccountType
 import org.mifos.mobile.feature.loanaccount.utils.AccountState
 import org.mifos.mobile.feature.loanaccount.utils.FilterUtil
@@ -120,21 +122,32 @@ class LoanAccountViewmodel(
      */
     fun getFilteredAccounts(
         searchQuery: String,
-        isFiltered: Boolean,
-        isSearchActive: Boolean,
+//        isFiltered: Boolean,
+//        isSearchActive: Boolean,
         selectedCheckboxLabels: List<StringResource?>,
         accounts: List<LoanAccount>,
     ): List<LoanAccount> {
-        val filteredAccounts = if (isFiltered) {
+//        val filteredAccounts = if (isFiltered) {
+//            filterAccountsByStatus(accounts, selectedCheckboxLabels)
+//        } else {
+//            accounts
+//        }
+//
+//        return if (isSearchActive) {
+//            filterAccountsBySearchQuery(filteredAccounts, searchQuery)
+//        } else {
+//            filteredAccounts
+//        }
+        val filteredByStatus = if (selectedCheckboxLabels.isNotEmpty()) {
             filterAccountsByStatus(accounts, selectedCheckboxLabels)
         } else {
             accounts
         }
 
-        return if (isSearchActive) {
-            filterAccountsBySearchQuery(filteredAccounts, searchQuery)
+        return if (searchQuery.isNotBlank()) {
+            filterAccountsBySearchQuery(filteredByStatus, searchQuery)
         } else {
-            filteredAccounts
+            filteredByStatus
         }
     }
 
@@ -143,9 +156,15 @@ class LoanAccountViewmodel(
      *
      * This function is called by [PullToRefreshBox] to reload loan accounts.
      */
-    fun refresh() {
+    fun refresh(
+        searchQuery: String,
+        selectedCheckboxLabels: List<StringResource?>,
+    ) {
         _isRefreshing.value = true
-        loadSavingsAccounts()
+        loadSavingsAccounts(
+            searchQuery = searchQuery,
+            selectedCheckboxLabels = selectedCheckboxLabels,
+        )
     }
 
     /**
@@ -154,7 +173,10 @@ class LoanAccountViewmodel(
      * This function fetches loan accounts from the repository and updates the UI accordingly.
      * If an error occurs during fetching, it updates the UI state to [AccountState.Error].
      */
-    fun loadSavingsAccounts() {
+    fun loadSavingsAccounts(
+        searchQuery: String,
+        selectedCheckboxLabels: List<StringResource?>,
+    ) {
         viewModelScope.launch {
             _accountsUiState.value = AccountState.Loading
             accountsRepositoryImpl.loadAccounts(
@@ -163,10 +185,68 @@ class LoanAccountViewmodel(
             ).catch {
                 _accountsUiState.value = AccountState.Error
             }.collect { clientAccounts ->
-                _accountsUiState.value =
-                    AccountState.Success(clientAccounts.data?.loanAccounts)
+                //                val loanAccounts = clientAccounts.data?.savingsAccounts
+                val loanAccounts = defaultloanAccounts
+                val filteredAccounts = getFilteredAccounts(
+                    searchQuery = searchQuery,
+                    selectedCheckboxLabels = selectedCheckboxLabels,
+                    accounts = loanAccounts,
+                )
+                _accountsUiState.value = if (filteredAccounts.isEmpty()) {
+                    AccountState.Empty
+                } else {
+                    AccountState.Success(filteredAccounts)
+                }
                 _isRefreshing.value = false
             }
         }
     }
 }
+
+val defaultloanAccounts = listOf(
+    LoanAccount(
+        id = 1,
+        accountNo = "123456789",
+        productName = "Account1",
+        productId = 1,
+        principal = 1000.0,
+        currency = Currency(
+            code = "USD",
+            name = "US Dollar",
+        ),
+        status = Status(
+            closed = true,
+        ),
+        timeline = null,
+    ),
+    LoanAccount(
+        id = 2,
+        accountNo = "987654321",
+        productName = "Account2",
+        productId = 12,
+        principal = 1000.0,
+        currency = Currency(
+            code = "USD",
+            name = "US Dollar",
+        ),
+        status = Status(
+            waitingForDisbursal = true,
+        ),
+        timeline = null,
+    ),
+    LoanAccount(
+        id = 3,
+        accountNo = "665456789",
+        productName = "Account3",
+        productId = 123,
+        principal = 1000.0,
+        currency = Currency(
+            code = "USD",
+            name = "US Dollar",
+        ),
+        status = Status(
+            closed = true,
+        ),
+        timeline = null,
+    ),
+)

@@ -25,6 +25,9 @@ import mifos_mobile.feature.savings_account.generated.resources.feature_account_
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.vectorResource
 import org.koin.compose.viewmodel.koinViewModel
+import org.mifos.mobile.core.model.entity.accounts.savings.Currency
+import org.mifos.mobile.core.model.entity.accounts.savings.SavingAccount
+import org.mifos.mobile.core.model.entity.accounts.savings.Status
 import org.mifos.mobile.core.model.enums.AccountType
 import org.mifos.mobile.core.ui.component.EmptyDataView
 import org.mifos.mobile.core.ui.component.MifosErrorComponent
@@ -37,8 +40,8 @@ import org.mifos.mobile.feature.savingsaccount.viewmodel.SavingsAccountViewmodel
 fun SavingsAccountScreen(
     checkboxOptionsLabels: List<StringResource?>,
     searchQuery: String,
-    isSearchActive: Boolean,
-    isFiltered: Boolean,
+//    isSearchActive: Boolean,
+//    isFiltered: Boolean,
     onAccountSelected: (accountType: AccountType, accountId: Long) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: SavingsAccountViewmodel = koinViewModel(),
@@ -49,14 +52,27 @@ fun SavingsAccountScreen(
 
     val pullRefreshState = rememberPullToRefreshState()
 
-    LaunchedEffect(Unit) {
-        viewModel.loadSavingsAccounts()
+    LaunchedEffect(checkboxOptionsLabels, searchQuery) {
+        viewModel.loadSavingsAccounts(
+            searchQuery = searchQuery,
+//            isFiltered = isFiltered,
+//            isSearchActive = isSearchActive,
+            selectedCheckboxLabels = checkboxOptionsLabels
+        )
     }
 
     PullToRefreshBox(
         isRefreshing = isRefreshing,
         state = pullRefreshState,
-        onRefresh = viewModel::refresh,
+//        onRefresh = viewModel::refresh,
+        onRefresh = {
+            viewModel.refresh(
+                searchQuery = searchQuery,
+//                isFiltered = isFiltered,
+//                isSearchActive = isSearchActive,
+                selectedCheckboxLabels = checkboxOptionsLabels
+            )
+        },
         modifier = modifier,
     ) {
         when (val state = uiState.value) {
@@ -64,7 +80,15 @@ fun SavingsAccountScreen(
                 MifosErrorComponent(
                     isNetworkConnected = isNetworkAvailable,
                     isRetryEnabled = true,
-                    onRetry = viewModel::loadSavingsAccounts,
+//                    onRetry = viewModel::loadSavingsAccounts,
+                    onRetry = {
+                        viewModel.loadSavingsAccounts(
+                            searchQuery = searchQuery,
+//                            isFiltered = isFiltered,
+//                            isSearchActive = isSearchActive,
+                            selectedCheckboxLabels = checkboxOptionsLabels
+                        )
+                    },
                 )
             }
 
@@ -72,37 +96,21 @@ fun SavingsAccountScreen(
                 MifosProgressIndicatorOverlay()
             }
 
-            is AccountState.Success -> {
-                val savingsAccounts = state.savingsAccounts
-                if (savingsAccounts.isNullOrEmpty()) {
-                    EmptyDataView(
-                        icon = vectorResource(resource = Res.drawable.feature_account_error_black),
-                        error = Res.string.feature_account_empty_savings_accounts,
-                        modifier = Modifier.fillMaxSize(),
-                    )
-                } else {
-                    val updatedFilteredAccounts =
-                        remember(
-                            searchQuery,
-                            isFiltered,
-                            isSearchActive,
-                            savingsAccounts,
-                            checkboxOptionsLabels,
-                        ) {
-                            viewModel.getFilteredAccounts(
-                                searchQuery = searchQuery,
-                                isFiltered = isFiltered,
-                                isSearchActive = isSearchActive,
-                                selectedCheckboxLabels = checkboxOptionsLabels,
-                                accounts = savingsAccounts,
-                            )
-                        }
+            is AccountState.Empty -> {
+                EmptyDataView(
+                    icon = vectorResource(resource = Res.drawable.feature_account_error_black),
+                    error = Res.string.feature_account_empty_savings_accounts,
+                    modifier = Modifier.fillMaxSize(),
+                )
+            }
 
-                    SavingsAccountScreenContent(
-                        accountList = updatedFilteredAccounts,
-                        onAccountSelected = onAccountSelected,
-                    )
-                }
+            is AccountState.Success -> {
+                val savingsAccounts = state.filteredSavingsAccounts
+
+                SavingsAccountScreenContent(
+                    accountList = savingsAccounts,
+                    onAccountSelected = onAccountSelected,
+                )
             }
         }
     }

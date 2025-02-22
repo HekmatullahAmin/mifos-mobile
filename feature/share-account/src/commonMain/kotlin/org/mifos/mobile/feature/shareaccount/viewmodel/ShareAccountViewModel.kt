@@ -22,7 +22,9 @@ import org.jetbrains.compose.resources.StringResource
 import org.mifos.mobile.core.data.repository.AccountsRepository
 import org.mifos.mobile.core.data.util.NetworkMonitor
 import org.mifos.mobile.core.datastore.UserPreferencesRepository
+import org.mifos.mobile.core.model.entity.accounts.savings.Currency
 import org.mifos.mobile.core.model.entity.accounts.share.ShareAccount
+import org.mifos.mobile.core.model.entity.accounts.share.Status
 import org.mifos.mobile.core.model.enums.AccountType
 import org.mifos.mobile.feature.shareaccount.utils.AccountState
 import org.mifos.mobile.feature.shareaccount.utils.FilterUtil
@@ -117,15 +119,26 @@ class ShareAccountViewModel(
      * @param accounts The list of all share accounts.
      * @return A filtered list of share accounts based on the applied filters.
      */
-    fun getFilteredAccounts(
+    private fun getFilteredAccounts(
         searchQuery: String,
-        isFiltered: Boolean,
-        isSearchActive: Boolean,
+//        isFiltered: Boolean,
+//        isSearchActive: Boolean,
         selectedCheckboxLabels: List<StringResource?>,
         accounts: List<ShareAccount>,
     ): List<ShareAccount> {
-        val filteredByStatus = if (isFiltered) filterAccountsByStatus(accounts, selectedCheckboxLabels) else accounts
-        return if (isSearchActive) filterAccountsBySearchQuery(filteredByStatus, searchQuery) else filteredByStatus
+//        val filteredByStatus = if (isFiltered) filterAccountsByStatus(accounts, selectedCheckboxLabels) else accounts
+//        return if (isSearchActive) filterAccountsBySearchQuery(filteredByStatus, searchQuery) else filteredByStatus
+        val filteredByStatus = if (selectedCheckboxLabels.isNotEmpty()) {
+            filterAccountsByStatus(accounts, selectedCheckboxLabels)
+        } else {
+            accounts
+        }
+
+        return if (searchQuery.isNotBlank()) {
+            filterAccountsBySearchQuery(filteredByStatus, searchQuery)
+        } else {
+            filteredByStatus
+        }
     }
 
     /**
@@ -133,9 +146,15 @@ class ShareAccountViewModel(
      *
      * This function is called by [PullToRefreshBox] to reload share accounts.
      */
-    fun refresh() {
+    fun refresh(
+        searchQuery: String,
+        selectedCheckboxLabels: List<StringResource?>,
+    ) {
         _isRefreshing.value = true
-        loadSavingsAccounts()
+        loadSavingsAccounts(
+            searchQuery = searchQuery,
+            selectedCheckboxLabels = selectedCheckboxLabels
+        )
     }
 
     /**
@@ -145,7 +164,10 @@ class ShareAccountViewModel(
      * If an error occurs during fetching, it updates the UI state to [AccountState.Error].
      * Once accounts are successfully loaded, [_isRefreshing] is reset to false.
      */
-    fun loadSavingsAccounts() {
+    fun loadSavingsAccounts(
+        searchQuery: String,
+        selectedCheckboxLabels: List<StringResource?>,
+    ) {
         viewModelScope.launch {
             _accountsUiState.value = AccountState.Loading
             accountsRepositoryImpl.loadAccounts(
@@ -154,10 +176,67 @@ class ShareAccountViewModel(
             ).catch {
                 _accountsUiState.value = AccountState.Error
             }.collect { clientAccounts ->
-                _accountsUiState.value =
-                    AccountState.Success(clientAccounts.data?.shareAccounts)
+//                _accountsUiState.value =
+//                    AccountState.Success(clientAccounts.data?.shareAccounts)
+//                _isRefreshing.value = false
+                val shareAccounts = defaultshareAccounts
+                val filteredAccounts = getFilteredAccounts(
+                    searchQuery = searchQuery,
+                    selectedCheckboxLabels = selectedCheckboxLabels,
+                    accounts = shareAccounts
+                )
+                _accountsUiState.value = if (filteredAccounts.isEmpty()) {
+                    AccountState.Empty
+                } else {
+                    AccountState.Success(filteredAccounts)
+                }
                 _isRefreshing.value = false
             }
         }
     }
 }
+
+val defaultshareAccounts = listOf(
+    ShareAccount(
+        id = 1,
+        accountNo = "123456789",
+        productName = "Account1",
+        productId = 1,
+        totalApprovedShares = 1,
+        status = Status(
+            active = true
+        ),
+        currency = Currency(
+            code = "USD",
+            name = "US Dollar"
+        )
+    ),
+    ShareAccount(
+        id = 2,
+        accountNo = "987654321",
+        productName = "Account2",
+        productId = 12,
+        totalApprovedShares = 1,
+        status = Status(
+            closed = true
+        ),
+        currency = Currency(
+            code = "USD",
+            name = "US Dollar"
+        )
+    ),
+    ShareAccount(
+        id = 3,
+        accountNo = "423126789",
+        productName = "Account3",
+        productId = 123,
+        totalApprovedShares = 1,
+        status = Status(
+            closed = true
+        ),
+        currency = Currency(
+            code = "USD",
+            name = "US Dollar"
+        )
+    )
+)

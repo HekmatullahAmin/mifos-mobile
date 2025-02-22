@@ -47,7 +47,10 @@ internal fun SavingsAccountScreenContent(
         verticalArrangement = Arrangement.spacedBy(8.dp),
         state = lazyListState,
     ) {
-        items(items = accountList, key = { account -> account.id }) { savingAccount ->
+        items(
+            items = accountList,
+            key = { account -> account.id }
+        ) { savingAccount ->
             SavingsAccountListItem(
                 savingAccount = savingAccount,
                 onAccountSelected = onAccountSelected,
@@ -67,13 +70,13 @@ private fun SavingsAccountListItem(
             Triple(
                 first = MaterialTheme.colorScheme.primary,
                 second = stringResource(Res.string.feature_account_active) +
-                    (
-                        savingAccount.lastActiveTransactionDate?.let {
-                            DateHelper.getDateAsString(
-                                it,
-                            )
-                        } ?: ""
-                        ),
+                        (
+                                savingAccount.lastActiveTransactionDate?.let {
+                                    DateHelper.getDateAsString(
+                                        it,
+                                    )
+                                } ?: ""
+                                ),
                 third = MaterialTheme.colorScheme.primary,
             )
         }
@@ -82,13 +85,13 @@ private fun SavingsAccountListItem(
             Triple(
                 first = MaterialTheme.colorScheme.secondaryContainer,
                 second = stringResource(Res.string.feature_account_approved) +
-                    (
-                        savingAccount.timeLine?.approvedOnDate?.let {
-                            DateHelper.getDateAsString(
-                                it,
-                            )
-                        } ?: ""
-                        ),
+                        (
+                                savingAccount.timeLine?.approvedOnDate?.let {
+                                    DateHelper.getDateAsString(
+                                        it,
+                                    )
+                                } ?: ""
+                                ),
                 third = null,
             )
         }
@@ -97,13 +100,13 @@ private fun SavingsAccountListItem(
             Triple(
                 first = MaterialTheme.colorScheme.tertiaryContainer,
                 second = stringResource(Res.string.feature_account_submitted) +
-                    (
-                        savingAccount.timeLine?.submittedOnDate?.let {
-                            DateHelper.getDateAsString(
-                                it,
-                            )
-                        } ?: ""
-                        ),
+                        (
+                                savingAccount.timeLine?.submittedOnDate?.let {
+                                    DateHelper.getDateAsString(
+                                        it,
+                                    )
+                                } ?: ""
+                                ),
                 third = null,
             )
         }
@@ -112,13 +115,13 @@ private fun SavingsAccountListItem(
             Triple(
                 first = MaterialTheme.colorScheme.errorContainer,
                 second = stringResource(Res.string.feature_account_matured) +
-                    (
-                        savingAccount.lastActiveTransactionDate?.let {
-                            DateHelper.getDateAsString(
-                                it,
-                            )
-                        } ?: ""
-                        ),
+                        (
+                                savingAccount.lastActiveTransactionDate?.let {
+                                    DateHelper.getDateAsString(
+                                        it,
+                                    )
+                                } ?: ""
+                                ),
                 third = MaterialTheme.colorScheme.errorContainer,
             )
         }
@@ -127,13 +130,13 @@ private fun SavingsAccountListItem(
             Triple(
                 first = MaterialTheme.colorScheme.surfaceVariant,
                 second = stringResource(Res.string.feature_account_closed) + (
-                    savingAccount.timeLine?.closedOnDate?.let {
-                        DateHelper.getDateAsString(
-                            it,
-                        )
-                    }
-                        ?: ""
-                    ),
+                        savingAccount.timeLine?.closedOnDate?.let {
+                            DateHelper.getDateAsString(
+                                it,
+                            )
+                        }
+                            ?: ""
+                        ),
                 third = null,
             )
         }

@@ -14,6 +14,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import cmp.navigation.navigation.NavGraphRoute.AUTH_GRAPH
 import cmp.navigation.navigation.NavGraphRoute.PASSCODE_GRAPH
@@ -22,6 +24,8 @@ import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 import org.mifos.mobile.core.data.util.NetworkMonitor
 import org.mifos.mobile.core.designsystem.theme.MifosMobileTheme
+import org.mifos.mobile.feature.accounts.navigation.accountsScreenRoute
+import org.mifos.mobile.feature.accounts.navigation.navigateToAccountsScreen
 
 @Composable
 fun ComposeApp(
@@ -44,6 +48,20 @@ fun ComposeApp(
     }
 
     MifosMobileTheme {
+//        NavHost(
+//            navController = navController,
+//            startDestination = "Start",
+//        ) {
+//            composable(route = "Start") {
+//                navController.navigateToAccountsScreen()
+//            }
+//            accountsScreenRoute(
+//                navigateBack = navController::popBackStack,
+//                navigateToAccountDetail = { _, _ -> },
+//                navigateToLoanApplicationScreen = { },
+//                navigateToSavingsApplicationScreen = { },
+//            )
+//        }
         RootNavGraph(
             modifier = modifier.fillMaxSize(),
             networkMonitor = networkMonitor,

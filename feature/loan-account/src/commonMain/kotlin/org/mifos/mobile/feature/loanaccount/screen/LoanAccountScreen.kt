@@ -16,7 +16,6 @@ import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import mifos_mobile.feature.loan_account.generated.resources.Res
@@ -37,8 +36,8 @@ import org.mifos.mobile.feature.loanaccount.viewmodel.LoanAccountViewmodel
 fun LoanAccountScreen(
     checkboxOptionsLabels: List<StringResource?>,
     searchQuery: String,
-    isSearchActive: Boolean,
-    isFiltered: Boolean,
+//    isSearchActive: Boolean,
+//    isFiltered: Boolean,
     onAccountSelected: (accountType: AccountType, accountId: Long) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: LoanAccountViewmodel = koinViewModel(),
@@ -49,14 +48,27 @@ fun LoanAccountScreen(
 
     val pullRefreshState = rememberPullToRefreshState()
 
-    LaunchedEffect(Unit) {
-        viewModel.loadSavingsAccounts()
+    LaunchedEffect(checkboxOptionsLabels, searchQuery) {
+        viewModel.loadSavingsAccounts(
+            searchQuery = searchQuery,
+//            isFiltered = isFiltered,
+//            isSearchActive = isSearchActive,
+            selectedCheckboxLabels = checkboxOptionsLabels,
+        )
     }
 
     PullToRefreshBox(
         isRefreshing = isRefreshing,
         state = pullRefreshState,
-        onRefresh = viewModel::refresh,
+//        onRefresh = viewModel::refresh,
+        onRefresh = {
+            viewModel.refresh(
+                searchQuery = searchQuery,
+//                isFiltered = isFiltered,
+//                isSearchActive = isSearchActive,
+                selectedCheckboxLabels = checkboxOptionsLabels,
+            )
+        },
         modifier = modifier,
     ) {
         when (val state = uiState.value) {
@@ -64,7 +76,13 @@ fun LoanAccountScreen(
                 MifosErrorComponent(
                     isNetworkConnected = isNetworkAvailable,
                     isRetryEnabled = true,
-                    onRetry = viewModel::loadSavingsAccounts,
+//                    onRetry = viewModel::loadSavingsAccounts,
+                    onRetry = {
+                        viewModel.loadSavingsAccounts(
+                            searchQuery = searchQuery,
+                            selectedCheckboxLabels = checkboxOptionsLabels,
+                        )
+                    },
                 )
             }
 
@@ -72,37 +90,21 @@ fun LoanAccountScreen(
                 MifosProgressIndicatorOverlay()
             }
 
-            is AccountState.Success -> {
-                val loanAccounts = state.accounts
-                if (loanAccounts.isNullOrEmpty()) {
-                    EmptyDataView(
-                        icon = vectorResource(resource = Res.drawable.feature_account_error_black),
-                        error = Res.string.feature_account_empty_loan_accounts,
-                        modifier = Modifier.fillMaxSize(),
-                    )
-                } else {
-                    val updatedFilteredAccounts =
-                        remember(
-                            searchQuery,
-                            isFiltered,
-                            isSearchActive,
-                            loanAccounts,
-                            checkboxOptionsLabels,
-                        ) {
-                            viewModel.getFilteredAccounts(
-                                searchQuery = searchQuery,
-                                isFiltered = isFiltered,
-                                isSearchActive = isSearchActive,
-                                selectedCheckboxLabels = checkboxOptionsLabels,
-                                accounts = loanAccounts,
-                            )
-                        }
+            is AccountState.Empty -> {
+                EmptyDataView(
+                    icon = vectorResource(resource = Res.drawable.feature_account_error_black),
+                    error = Res.string.feature_account_empty_loan_accounts,
+                    modifier = Modifier.fillMaxSize(),
+                )
+            }
 
-                    LoanAccountScreenContent(
-                        accountList = updatedFilteredAccounts,
-                        onAccountSelected = onAccountSelected,
-                    )
-                }
+            is AccountState.Success -> {
+                val loanAccounts = state.filteredLoanAccounts
+                LoanAccountScreenContent(
+//                        accountList = updatedFilteredAccounts,
+                    accountList = loanAccounts,
+                    onAccountSelected = onAccountSelected,
+                )
             }
         }
     }

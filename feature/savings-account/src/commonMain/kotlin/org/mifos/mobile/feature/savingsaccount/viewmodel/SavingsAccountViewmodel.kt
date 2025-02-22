@@ -9,6 +9,7 @@
  */
 package org.mifos.mobile.feature.savingsaccount.viewmodel
 
+import androidx.compose.runtime.remember
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,7 +23,9 @@ import org.jetbrains.compose.resources.StringResource
 import org.mifos.mobile.core.data.repository.AccountsRepository
 import org.mifos.mobile.core.data.util.NetworkMonitor
 import org.mifos.mobile.core.datastore.UserPreferencesRepository
+import org.mifos.mobile.core.model.entity.accounts.savings.Currency
 import org.mifos.mobile.core.model.entity.accounts.savings.SavingAccount
+import org.mifos.mobile.core.model.entity.accounts.savings.Status
 import org.mifos.mobile.core.model.enums.AccountType
 import org.mifos.mobile.feature.savingsaccount.utils.AccountState
 import org.mifos.mobile.feature.savingsaccount.utils.FilterUtil
@@ -66,6 +69,13 @@ class SavingsAccountViewmodel(
     @Suppress("PropertyName")
     private val _accountsUiState = MutableStateFlow<AccountState>(AccountState.Loading)
     val accountUiState: StateFlow<AccountState> = _accountsUiState.asStateFlow()
+
+    init {
+        loadSavingsAccounts(
+            searchQuery = "",
+            selectedCheckboxLabels = emptyList()
+        )
+    }
 
     /**
      * Filters savings accounts based on the search query.
@@ -119,13 +129,28 @@ class SavingsAccountViewmodel(
      */
     fun getFilteredAccounts(
         searchQuery: String,
-        isFiltered: Boolean,
-        isSearchActive: Boolean,
+//        isFiltered: Boolean,
+//        isSearchActive: Boolean,
         selectedCheckboxLabels: List<StringResource?>,
         accounts: List<SavingAccount>,
     ): List<SavingAccount> {
-        val filteredByStatus = if (isFiltered) filterAccountsByStatus(accounts, selectedCheckboxLabels) else accounts
-        return if (isSearchActive) filterAccountsBySearchQuery(filteredByStatus, searchQuery) else filteredByStatus
+//        val filteredByStatus =
+//            if (isFiltered) filterAccountsByStatus(accounts, selectedCheckboxLabels) else accounts
+//        return if (isSearchActive) filterAccountsBySearchQuery(
+//            filteredByStatus,
+//            searchQuery
+//        ) else filteredByStatus
+        val filteredByStatus = if (selectedCheckboxLabels.isNotEmpty()) {
+            filterAccountsByStatus(accounts, selectedCheckboxLabels)
+        } else {
+            accounts
+        }
+
+        return if (searchQuery.isNotBlank()) {
+            filterAccountsBySearchQuery(filteredByStatus, searchQuery)
+        } else {
+            filteredByStatus
+        }
     }
 
     /**
@@ -133,9 +158,19 @@ class SavingsAccountViewmodel(
      *
      * This function is called by [PullToRefreshBox] to reload savings accounts.
      */
-    fun refresh() {
+    fun refresh(
+        searchQuery: String,
+//        isFiltered: Boolean,
+//        isSearchActive: Boolean,
+        selectedCheckboxLabels: List<StringResource?>,
+    ) {
         _isRefreshing.value = true
-        loadSavingsAccounts()
+        loadSavingsAccounts(
+            searchQuery = searchQuery,
+//            isFiltered = isFiltered,
+//            isSearchActive = isSearchActive,
+            selectedCheckboxLabels = selectedCheckboxLabels
+        )
     }
 
     /**
@@ -145,7 +180,12 @@ class SavingsAccountViewmodel(
      * If an error occurs during fetching, it updates the UI state to [AccountState.Error].
      * Once accounts are successfully loaded, [_isRefreshing] is reset to false.
      */
-    fun loadSavingsAccounts() {
+    fun loadSavingsAccounts(
+        searchQuery: String,
+//        isFiltered: Boolean,
+//        isSearchActive: Boolean,
+        selectedCheckboxLabels: List<StringResource?>,
+    ) {
         viewModelScope.launch {
             _accountsUiState.value = AccountState.Loading
             accountsRepositoryImpl.loadAccounts(
@@ -154,10 +194,74 @@ class SavingsAccountViewmodel(
             ).catch {
                 _accountsUiState.value = AccountState.Error
             }.collect { clientAccounts ->
-                _accountsUiState.value =
-                    AccountState.Success(clientAccounts.data?.savingsAccounts)
+//                val savingsAccounts = clientAccounts.data?.savingsAccounts
+                val savingsAccounts = defaultsavingsAccounts
+                val filteredAccounts = getFilteredAccounts(
+                    searchQuery = searchQuery,
+                    selectedCheckboxLabels = selectedCheckboxLabels,
+                    accounts = savingsAccounts
+                )
+                _accountsUiState.value = if (filteredAccounts.isEmpty()) {
+                    AccountState.Empty
+                } else {
+                    AccountState.Success(filteredAccounts)
+                }
                 _isRefreshing.value = false
             }
         }
     }
 }
+
+val defaultsavingsAccounts = listOf(
+    SavingAccount(
+        id = 1,
+        accountNo = "123456789",
+        productName = "Account1 empty",
+        productId = 1,
+        overdraftLimit = 10000,
+        minRequiredBalance = 5000,
+        accountBalance = 20000.0,
+        totalDeposits = 5000.0,
+        status = Status(
+            approved = true
+        ),
+        currency = Currency(
+            code = "USD",
+            name = "US Dollar"
+        )
+    ),
+    SavingAccount(
+        id = 2,
+        accountNo = "35461123",
+        productName = "Account2",
+        productId = 12,
+        overdraftLimit = 10000,
+        minRequiredBalance = 5000,
+        accountBalance = 20000.0,
+        totalDeposits = 5000.0,
+        status = Status(
+            active = true
+        ),
+        currency = Currency(
+            code = "USD",
+            name = "US Dollar"
+        )
+    ),
+    SavingAccount(
+        id = 3,
+        accountNo = "98761234",
+        productName = "Account3",
+        productId = 123,
+        overdraftLimit = 10000,
+        minRequiredBalance = 5000,
+        accountBalance = 20000.0,
+        totalDeposits = 5000.0,
+        status = Status(
+            active = true
+        ),
+        currency = Currency(
+            code = "USD",
+            name = "US Dollar"
+        )
+    )
+)
