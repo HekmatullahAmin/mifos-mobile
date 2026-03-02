@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
     spec.name                     = 'cmp_shared'
-    spec.version                  = '1.0'
-    spec.homepage                 = 'https://github.com/openMF/mifos-mobile'
+    spec.version                  = '2026.2.4'
+    spec.homepage                 = 'https://github.com/openMF/kmp-project-template'
     spec.source                   = { :http=> ''}
     spec.authors                  = ''
     spec.license                  = ''
